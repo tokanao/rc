@@ -1,0 +1,25 @@
+escape ^Tt
+bind 'k' kill
+#vbel off
+#hardstatus alwayslastline "%w"
+#hardstatus string "[screen %n%?: %t%? %h"
+hardstatus lastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+
+#shell zsh
+
+#putty bindings
+bindkey "^[OC" next
+bindkey "^[OD" prev
+
+termcapinfo xterm "ks=\E[?1l\E:ku=\E[A:kd=\E[B:kl=\E[D:kr=\E[C:kh=\E[5~:kH=\E[F"
+
+# change encode
+bind 'U' eval "encoding utf8" "stuff 'export LANG=ja_JP.UTF-8\012'"
+bind 'E' eval "encoding euc"  "stuff 'export LANG=ja_JP.EUC-JP\012'"
+
+# tips
+# reload .screenrc
+# <escape>:source ~/.screenrc
+
+# ターミナルがリサイズされるのを防ぐ
+termcapinfo xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
