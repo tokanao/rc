@@ -74,12 +74,13 @@ cd ..
 zle accept-line
 }
 zle -N cdup
-bindkey '\^' cdup
-
+#bindkey '\^' cdup
 
 #bindkey -L 	show shortcut keys. written 'man zshzle'
 
 
+PROMPT="${USER}@%m:%%"
+RPROMPT='[%~]'
 
 
 #vim:ts=4:sw=4:et
