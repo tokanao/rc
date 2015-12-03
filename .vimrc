@@ -1,4 +1,20 @@
 
+set ic
+
+nmap <Space> 
+nmap <C-l> :noh<CR>
+
+" Move Window
+nmap <C-p> <C-w>2-<CR>
+nmap <C-n> <C-w>2+<CR>
+
+map <F3> :cn<CR>
+map <F4> :cp<CR>
+
+" $this->p($var);
+autocmd FileType php ab debug GC_Utils_Ex::gfDebugLog();<left><left>
+autocmd FileType php ab debugp SC_Utils::sfPrintR();<left><left>
+
 if has('win32')
 " if has("gui_win32")
 
@@ -39,8 +55,6 @@ if has('win32')
   map k gk
   map n nzz
 
-  nmap <Space> 
-  nmap <C-l> :noh<CR>
   nmap <C-s> :w<CR>
 
   map j :!start gvim<CR>
@@ -57,15 +71,11 @@ if has('win32')
   nmap ,v :tabnew $VIM/vimrc_local.vim<CR>
   nmap ,r :pedit $VIM/vimrc_local_toka.vim<CR>
 
-  map <F3> :cn<CR>
-  map <F4> :cp<CR>
   nnoremap <F6> :let @* = '%'<CR>
   map <F8> :!start cmd<CR>
   map <F9> :call OpenExplorer()<CR>
 
   " Move Window
-  nmap <C-p> <C-w>2-<CR>
-  nmap <C-n> <C-w>2+<CR>
   nnoremap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
   nnoremap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
 
@@ -83,10 +93,9 @@ if has('win32')
   " 最近使ったファイルの一覧
   " noremap <C-Z> :Unite file_mru<CR>
 
-
-  ab debuglog GC_Utils_Ex::gfDebugLog();<left><left>
+  "ab debuglog GC_Utils_Ex::gfDebugLog();<left><left>
   " $this->p($var);
-  ab debugprint SC_Utils::sfPrintR();<left><left>
+  "ab debugprint SC_Utils::sfPrintR();<left><left>
 
   command! Memo       new    $VIM/mynote/memo.changelog
   command! -nargs=0 LcdCurrent lcd %:p:h

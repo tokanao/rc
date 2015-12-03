@@ -10,6 +10,7 @@ zstyle ':completion:*' list-colors "${LS_COLORS}"
 
 # alias
 alias -g L='|less'
+alias -g H='|head'
 alias la='ls -a'
 alias ll='ls -l --color=auto --block-size=k'
 alias h='history 0'
@@ -17,6 +18,7 @@ alias vizshrc='vi ~/.zshrc ; source ~/.zshrc'
 alias vivimrc='vi ~/.vimrc'
 #alias tree='tree --charset=x'
 alias rc='rclone'
+alias ff='find -iname'
 
 
 # 履歴の保存場所

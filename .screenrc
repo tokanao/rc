@@ -5,7 +5,7 @@ bind 'k' kill
 #hardstatus string "[screen %n%?: %t%? %h"
 hardstatus lastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 
-#shell zsh
+shell zsh
 
 #putty bindings
 bindkey "^[OC" next
