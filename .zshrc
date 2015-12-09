@@ -7,6 +7,7 @@ compinit
 autoload colors
 zstyle ':completion:*' list-colors "${LS_COLORS}"
 
+export LANG=ja_JP.UTF-8
 
 # alias
 alias -g L='|less'
@@ -14,6 +15,7 @@ alias -g H='|head'
 alias la='ls -a'
 alias ll='ls -l --color=auto --block-size=k'
 alias h='history 0'
+alias vi='vim'
 alias vizshrc='vi ~/.zshrc ; source ~/.zshrc'
 alias vivimrc='vi ~/.vimrc'
 #alias tree='tree --charset=x'

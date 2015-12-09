@@ -1,6 +1,11 @@
 
 set ic
 
+"行が折り返されている場合に対応
+map j gj
+map k gk
+map n nzz
+
 nmap <Space> 
 nmap <C-l> :noh<CR>
 
@@ -49,11 +54,6 @@ if has('win32')
   " -- emmet
   " let g:user_emmet_settings = { 'variables': { 'lang' : 'ja' } } 
   let g:user_emmet_settings = { 'indentation' : '  ' }
-
-  "行が折り返されている場合に対応
-  map j gj
-  map k gk
-  map n nzz
 
   nmap <C-s> :w<CR>
 
@@ -149,6 +149,7 @@ if has('win32')
   NeoBundleFetch 'Shougo/unite.vim'
   NeoBundleFetch 'alvan/vim-closetag'
   NeoBundleFetch 'vim-scripts/Syntastic'
+  NeoBundleFetch 'vim-scripts/Syntastic'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -185,11 +186,14 @@ if has('win32')
 
 elseif has('unix')
   " PuTTY mouse setting
-  "set mouse=a
+  set mouse=a
   set ttymouse=xterm2
 
   " PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
   set paste
+
+  nmap ,s :source ~/.vimrc<CR>
+  nmap ,v :tabnew ~/.vimrc<CR>
 
   " neobundle
   if has('vim_starting')
@@ -209,6 +213,7 @@ elseif has('unix')
   NeoBundleFetch 'Shougo/neobundle.vim'
   NeoBundleFetch 'mattn/emmet-vim'
   NeoBundleFetch 'tomtom/tcomment_vim'
+  NeoBundleFetch 'vim-scripts/taglist.vim'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
