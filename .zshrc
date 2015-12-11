@@ -10,6 +10,7 @@ zstyle ':completion:*' list-colors "${LS_COLORS}"
 
 # alias
 alias -g L='|less'
+alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -l --color=auto --block-size=k'
 alias h='history 0'
