@@ -17,8 +17,14 @@ map <F3> :cn<CR>
 map <F4> :cp<CR>
 
 " $this->p($var);
-autocmd FileType php ab debug GC_Utils_Ex::gfDebugLog();<left><left>
-autocmd FileType php ab debugp SC_Utils::sfPrintR();<left><left>
+autocmd FileType php ab ec_debug GC_Utils_Ex::gfDebugLog();<left><left>
+autocmd FileType php ab ec_print SC_Utils::sfPrintR();<left><left>
+autocmd FileType php ab var_dump echo "<pre>"var_dump();echo "</pre>"
+autocmd FileType php ab trace debug_print_backtrace();
+
+" PHP perfomance
+"$time_start = microtime(true);
+"printf("Process Time : %.2f [s]\n", microtime(true) - $time_start);
 
 if has('win32')
 " if has("gui_win32")
@@ -190,7 +196,7 @@ elseif has('unix')
   set ttymouse=xterm2
 
   " PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
-  set paste
+  "set paste
 
   nmap ,s :source ~/.vimrc<CR>
   nmap ,v :tabnew ~/.vimrc<CR>

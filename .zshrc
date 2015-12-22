@@ -14,6 +14,7 @@ alias -g L='|less'
 alias -g H='|head'
 alias la='ls -a'
 alias ll='ls -l --color=auto --block-size=k'
+alias lv='less'
 alias h='history 0'
 alias vi='vim'
 alias vizshrc='vi ~/.zshrc ; source ~/.zshrc'
@@ -22,6 +23,7 @@ alias vivimrc='vi ~/.vimrc'
 alias rc='rclone'
 alias ff='find -iname'
 
+EDITOR=vim
 
 # 履歴の保存場所
 HISTFILE=~/.zsh_history
