@@ -190,7 +190,7 @@ elseif has('unix')
   set ttymouse=xterm2
 
   " PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
-  set paste
+  "set paste
 
   " neobundle
   if has('vim_starting')
