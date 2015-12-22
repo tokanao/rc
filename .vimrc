@@ -1,5 +1,8 @@
 
 set ic
+set ts=2
+set sw=2
+set et
 
 "行が折り返されている場合に対応
 map j gj
@@ -26,6 +29,10 @@ autocmd FileType php ab trace debug_print_backtrace();
 "$time_start = microtime(true);
 "printf("Process Time : %.2f [s]\n", microtime(true) - $time_start);
 
+nmap ,e :NERDTreeToggle<CR>
+noremap <C-e> :Unite buffer<CR>
+
+
 if has('win32')
 " if has("gui_win32")
 
@@ -51,9 +58,6 @@ if has('win32')
   set undodir=$VIM/undo
   set noequalalways      " 全てのウィンドウのサイズを同じにする。
   set scrolloff=5        " カーソルの上または下に表示する最小限の行数
-  set ts=2
-  set sw=2
-  set et
                          " set verbose=9           " autocmdデバッグ用
   set path+=.\**
 
@@ -137,6 +141,8 @@ if has('win32')
   endif
 
   " Required:
+  "mkdir ~/.vim/bundle
+  "git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
   call neobundle#begin(expand('$VIM/bundle/'))
 
   " Let NeoBundle manage NeoBundle
@@ -211,6 +217,10 @@ elseif has('unix')
   set runtimepath+=~/.vim/bundle/*/
   endif
 
+
+  nmap ,v :tabnew ~/.vimrc<CR>
+
+
   " Required:
   call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -220,6 +230,9 @@ elseif has('unix')
   NeoBundleFetch 'mattn/emmet-vim'
   NeoBundleFetch 'tomtom/tcomment_vim'
   NeoBundleFetch 'vim-scripts/taglist.vim'
+  NeoBundleFetch 'tpope/vim-rails'      " Rails向けのコマンドを提供する
+  NeoBundleFetch 'scrooloose/nerdtree'
+  NeoBundleFetch 'Shougo/unite.vim'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.

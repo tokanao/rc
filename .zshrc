@@ -12,6 +12,7 @@ export LANG=ja_JP.UTF-8
 # alias
 alias -g L='|less'
 alias -g H='|head'
+alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -l --color=auto --block-size=k'
 alias lv='less'
