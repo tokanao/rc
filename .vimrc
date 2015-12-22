@@ -1,4 +1,19 @@
 
+set ts=2
+set sw=2
+set et
+
+map <F3> :cn<CR>
+map <F4> :cp<CR>
+
+nmap <C-p> <C-w>2-<CR>
+nmap <C-n> <C-w>2+<CR>
+
+" nnoremap <silent><C-e> :NERDTreeToggle<CR>
+nmap ,e :NERDTreeToggle<CR>
+noremap <C-e> :Unite buffer<CR>
+
+
 if has('win32')
 " if has("gui_win32")
 
@@ -24,9 +39,6 @@ if has('win32')
   set undodir=$VIM/undo
   set noequalalways      " 全てのウィンドウのサイズを同じにする。
   set scrolloff=5        " カーソルの上または下に表示する最小限の行数
-  set ts=2
-  set sw=2
-  set et
                          " set verbose=9           " autocmdデバッグ用
   set path+=.\**
 
@@ -51,21 +63,17 @@ if has('win32')
   " VimTip 448: Yank (copy) decimal numbers from hex numbers.
   map \y g*<esc>:let @*=@/ + 0<enter> 
 
+  nnoremap <F6> :let @* = '%'<CR>
+  map <F8> :!start cmd<CR>
+  map <F9> :call OpenExplorer()<CR>
+
   " vimrc の更新、再読み込みを簡単にするマップ
   nmap ,s :source $VIM/vimrc_local.vim<CR>:source $VIM/vimrc<CR>
   " nmap ,v :tab args $VIM/vimrc_local.vim $VIM/vimrc<CR>
   nmap ,v :tabnew $VIM/vimrc_local.vim<CR>
   nmap ,r :pedit $VIM/vimrc_local_toka.vim<CR>
 
-  map <F3> :cn<CR>
-  map <F4> :cp<CR>
-  nnoremap <F6> :let @* = '%'<CR>
-  map <F8> :!start cmd<CR>
-  map <F9> :call OpenExplorer()<CR>
-
   " Move Window
-  nmap <C-p> <C-w>2-<CR>
-  nmap <C-n> <C-w>2+<CR>
   nnoremap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
   nnoremap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
 
@@ -122,6 +130,8 @@ if has('win32')
   endif
 
   " Required:
+  "mkdir ~/.vim/bundle
+  "git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
   call neobundle#begin(expand('$VIM/bundle/'))
 
   " Let NeoBundle manage NeoBundle
@@ -176,7 +186,7 @@ if has('win32')
 
 elseif has('unix')
   " PuTTY mouse setting
-  "set mouse=a
+  set mouse=a
   set ttymouse=xterm2
 
   " PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
@@ -192,6 +202,10 @@ elseif has('unix')
   set runtimepath+=~/.vim/bundle/*/
   endif
 
+
+  nmap ,v :tabnew ~/.vimrc<CR>
+
+
   " Required:
   call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -200,6 +214,9 @@ elseif has('unix')
   NeoBundleFetch 'Shougo/neobundle.vim'
   NeoBundleFetch 'mattn/emmet-vim'
   NeoBundleFetch 'tomtom/tcomment_vim'
+  NeoBundleFetch 'tpope/vim-rails'      " Rails向けのコマンドを提供する
+  NeoBundleFetch 'scrooloose/nerdtree'
+  NeoBundleFetch 'Shougo/unite.vim'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
