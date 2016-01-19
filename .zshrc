@@ -8,6 +8,7 @@ autoload colors
 zstyle ':completion:*' list-colors "${LS_COLORS}"
 
 export LANG=ja_JP.UTF-8
+export EDITOR=vim
 
 # alias
 alias -g L='|less'
@@ -23,8 +24,8 @@ alias vivimrc='vi ~/.vimrc'
 #alias tree='tree --charset=x'
 alias rc='rclone'
 alias ff='find -iname'
+alias cdsf='cd /usr/share/nginx/html'
 
-EDITOR=vim
 
 # 履歴の保存場所
 HISTFILE=~/.zsh_history

@@ -4,6 +4,8 @@ set ts=2
 set sw=2
 set et
 
+set path+=\*\*/\*
+
 "行が折り返されている場合に対応
 map j gj
 map k gk
@@ -22,15 +24,15 @@ map <F4> :cp<CR>
 " $this->p($var);
 autocmd FileType php ab ec_debug GC_Utils_Ex::gfDebugLog();<left><left>
 autocmd FileType php ab ec_print SC_Utils::sfPrintR();<left><left>
-autocmd FileType php ab var_dump echo "<pre>"var_dump();echo "</pre>"
+autocmd FileType php ab var_dump echo "<pre>";var_dump();echo "</pre>";
 autocmd FileType php ab trace debug_print_backtrace();
 
 " PHP perfomance
 "$time_start = microtime(true);
 "printf("Process Time : %.2f [s]\n", microtime(true) - $time_start);
 
-nmap ,e :NERDTreeToggle<CR>
-noremap <C-e> :Unite buffer<CR>
+"nmap ,e :NERDTreeToggle<CR>
+"noremap <C-e> :Unite buffer<CR>
 
 
 if has('win32')
@@ -59,7 +61,7 @@ if has('win32')
   set noequalalways      " 全てのウィンドウのサイズを同じにする。
   set scrolloff=5        " カーソルの上または下に表示する最小限の行数
                          " set verbose=9           " autocmdデバッグ用
-  set path+=.\**
+  " set path+=.\**
 
   " -- emmet
   " let g:user_emmet_settings = { 'variables': { 'lang' : 'ja' } } 
@@ -231,8 +233,8 @@ elseif has('unix')
   NeoBundleFetch 'tomtom/tcomment_vim'
   NeoBundleFetch 'vim-scripts/taglist.vim'
   NeoBundleFetch 'tpope/vim-rails'      " Rails向けのコマンドを提供する
-  NeoBundleFetch 'scrooloose/nerdtree'
-  NeoBundleFetch 'Shougo/unite.vim'
+  "NeoBundleFetch 'scrooloose/nerdtree'
+  "NeoBundleFetch 'Shougo/unite.vim'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -248,6 +250,20 @@ elseif has('unix')
   NeoBundleCheck
 
   colorscheme darkblue
+
+  " Stamp factory ソース切り替え(本番 <-> テスト環境)
+  command! Ectoggle call Ectoggle()
+  function! Ectoggle()
+    let fpath = expand("%:p")
+    if match(fpath, "_test") == -1
+      let fpath = substitute(fpath, "html", "html_test", "")
+    else
+      let fpath = substitute(fpath, "html_test", "html_test", "")
+    endif
+    " echo fpath
+    let @@ = fpath
+    execute "new " . fpath
+  endfunc
 
 elseif has('mac')
 endif
