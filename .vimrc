@@ -219,6 +219,7 @@ elseif has('unix')
 
 
   nmap ,v :tabnew ~/.vimrc<CR>
+  noremap  g/ :<C-u>Migemo<CR>
 
 
   " Required:
@@ -233,6 +234,7 @@ elseif has('unix')
   NeoBundleFetch 'tpope/vim-rails'      " Rails向けのコマンドを提供する
   NeoBundleFetch 'scrooloose/nerdtree'
   NeoBundleFetch 'Shougo/unite.vim'
+  NeoBundleFetch 'haya14busa/vim-migemo'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
