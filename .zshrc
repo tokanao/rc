@@ -35,6 +35,7 @@ alias cdtool='/home/uptjp/www/tool'
 # alias beste='nice -n 19 ionice -c 3'
 alias gits='git status'
 #alias lsd='ls -l --color=auto html|grep ^d'
+alias mv='mv -i'
 
 
 # 履歴の保存場所
