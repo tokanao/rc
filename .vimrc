@@ -3,6 +3,10 @@ set ic
 set ts=2
 set sw=2
 set et
+set nowrapscan
+
+" set path+=\*\*/\*
+set path=$PWD/**
 
 "行が折り返されている場合に対応
 map j gj
@@ -16,21 +20,23 @@ nmap <C-l> :noh<CR>
 nmap <C-p> <C-w>2-<CR>
 nmap <C-n> <C-w>2+<CR>
 
+"map <F2> :echo expand("%:p")<CR>
+map <F2> :DSplit<CR>
 map <F3> :cn<CR>
 map <F4> :cp<CR>
 
 " $this->p($var);
 autocmd FileType php ab ec_debug GC_Utils_Ex::gfDebugLog();<left><left>
 autocmd FileType php ab ec_print SC_Utils::sfPrintR();<left><left>
-autocmd FileType php ab var_dump echo "<pre>"var_dump();echo "</pre>"
+autocmd FileType php ab var_dump echo "<pre>";var_dump();echo "</pre>";
 autocmd FileType php ab trace debug_print_backtrace();
 
 " PHP perfomance
 "$time_start = microtime(true);
 "printf("Process Time : %.2f [s]\n", microtime(true) - $time_start);
 
-nmap ,e :NERDTreeToggle<CR>
-noremap <C-e> :Unite buffer<CR>
+"nmap ,e :NERDTreeToggle<CR>
+"noremap <C-e> :Unite buffer<CR>  " vim 7.2 では利用できない
 
 
 if has('win32')
@@ -59,7 +65,7 @@ if has('win32')
   set noequalalways      " 全てのウィンドウのサイズを同じにする。
   set scrolloff=5        " カーソルの上または下に表示する最小限の行数
                          " set verbose=9           " autocmdデバッグ用
-  set path+=.\**
+  " set path+=.\**
 
   " -- emmet
   " let g:user_emmet_settings = { 'variables': { 'lang' : 'ja' } } 
@@ -200,6 +206,7 @@ elseif has('unix')
   " PuTTY mouse setting
   set mouse=a
   set ttymouse=xterm2
+  set grepprg=grep\ -inr\ $*\ /dev/null
 
   " PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
   "set paste
@@ -232,9 +239,11 @@ elseif has('unix')
   NeoBundleFetch 'tomtom/tcomment_vim'
   NeoBundleFetch 'vim-scripts/taglist.vim'
   NeoBundleFetch 'tpope/vim-rails'      " Rails向けのコマンドを提供する
-  NeoBundleFetch 'scrooloose/nerdtree'
-  NeoBundleFetch 'Shougo/unite.vim'
   NeoBundleFetch 'haya14busa/vim-migemo'
+  if v:version >= 704
+    NeoBundleFetch 'scrooloose/nerdtree'
+    NeoBundleFetch 'Shougo/unite.vim'
+  endif
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -250,6 +259,45 @@ elseif has('unix')
   NeoBundleCheck
 
   colorscheme darkblue
+
+  " Stamp factory ソース切り替え(本番 <-> テスト環境)
+  command! Toggle call Toggle()
+  function! Toggle()
+    let fpath = expand("%:p")
+
+    if match(fpath, "/html/") != -1
+      let fpath = substitute(fpath, "html", "html_test", "")
+    elseif match(fpath, "/html_test/") != -1
+      let fpath = substitute(fpath, "html_test", "html_test", "")
+
+    elseif match(fpath, "/uptjp/") != -1
+      let fpath = substitute(fpath, "uptjp", "uptjpdevel", "")
+    elseif match(fpath, "/uptjpdevel/") != -1
+      let fpath = substitute(fpath, "uptjpdevel", "uptjp", "")
+    endif
+
+    " echo fpath
+    let @@ = fpath
+    execute "new " . fpath
+  endfunc
+
+  command! DSplit call DSplit()
+  function! DSplit()
+    let fpath = expand("%:p")
+
+    if match(fpath, "/html/") != -1
+      let fpath = substitute(fpath, "html", "html_test", "")
+    elseif match(fpath, "/html_test/") != -1
+      let fpath = substitute(fpath, "html_test", "html_test", "")
+
+    elseif match(fpath, "/uptjp/") != -1
+      let fpath = substitute(fpath, "uptjp", "uptjpdevel", "")
+    elseif match(fpath, "/uptjpdevel/") != -1
+      let fpath = substitute(fpath, "uptjpdevel", "uptjp", "")
+    endif
+
+    execute "diffsplit " . fpath
+  endfunc
 
 elseif has('mac')
 endif
