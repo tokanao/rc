@@ -226,6 +226,14 @@ elseif has('unix')
 
 
   nmap ,v :tabnew ~/.vimrc<CR>
+
+  " Required:
+  " % git clone https://github.com/koron/cmigemo
+  " % cd cmigemo
+  " % ./configure
+  " % make gcc
+  " % make gcc-dict
+  " % make gcc-install
   noremap  g/ :<C-u>Migemo<CR>
 
 
@@ -244,6 +252,8 @@ elseif has('unix')
     NeoBundleFetch 'scrooloose/nerdtree'
     NeoBundleFetch 'Shougo/unite.vim'
   endif
+  NeoBundleFetch 'chrisbra/SudoEdit.vim'
+  NeoBundleFetch 'tpope/vim-fugitive'       " git
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
