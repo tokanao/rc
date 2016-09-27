@@ -1,7 +1,7 @@
 # Created by newuser for 5.0.2
 #
-autoload -U compinit
-compinit
+#autoload -U compinit
+#compinit
 
 #補完でカラーを使用する
 autoload colors
