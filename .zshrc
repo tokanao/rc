@@ -1,7 +1,7 @@
 # Created by newuser for 5.0.2
 #
-autoload -U compinit
-compinit
+#autoload -U compinit
+#compinit
 
 #補完でカラーを使用する
 autoload colors
@@ -19,7 +19,7 @@ alias -g L='|lv'
 alias -g H='|head -n 20'
 alias ls='ls --color=auto'
 alias la='ls -a'
-alias ll='ls -l --color=auto --block-size=k'
+alias ll='ls -lt --color=auto --block-size=k'
 #alias lv='less'
 alias h='history 0'
 alias vi='vim'
@@ -114,6 +114,11 @@ zle -N cdup
 
 PROMPT="${USER}@%m:%%"
 RPROMPT='[%~]'
+
+
+PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 
 
 # 履歴検索(^r)で スペースキーが無効化されてしまうため、使わない
