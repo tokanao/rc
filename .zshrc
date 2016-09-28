@@ -116,8 +116,10 @@ PROMPT="${USER}@%m:%%"
 RPROMPT='[%~]'
 
 
-PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [ -d "$HOME/.rbenv/bin" ] ; then
+  PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 
 
 
