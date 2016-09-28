@@ -254,6 +254,7 @@ elseif has('unix')
   endif
   NeoBundleFetch 'chrisbra/SudoEdit.vim'
   NeoBundleFetch 'tpope/vim-fugitive'       " git
+  NeoBundleFetch 'evanmiller/nginx-vim-syntax'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
