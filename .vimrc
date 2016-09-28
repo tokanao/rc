@@ -244,6 +244,8 @@ elseif has('unix')
     NeoBundleFetch 'scrooloose/nerdtree'
     NeoBundleFetch 'Shougo/unite.vim'
   endif
+  NeoBundleFetch 'chrisbra/SudoEdit.vim'
+  NeoBundleFetch 'tpope/vim-fugitive'       " git
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.

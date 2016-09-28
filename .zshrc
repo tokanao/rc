@@ -15,12 +15,12 @@ bindkey -d
 bindkey -e
 
 # alias
-alias -g L='|less'
+alias -g L='|lv'
 alias -g H='|head -n 20'
 alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -l --color=auto --block-size=k'
-alias lv='less'
+#alias lv='less'
 alias h='history 0'
 alias vi='vim'
 alias vizshrc='vi ~/.zshrc ; source ~/.zshrc'
