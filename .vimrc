@@ -4,6 +4,7 @@ set ts=2
 set sw=2
 set et
 set nowrapscan
+set noequalalways
 
 " set path+=\*\*/\*
 set path=$PWD/**
@@ -21,15 +22,31 @@ nmap <C-p> <C-w>2-<CR>
 nmap <C-n> <C-w>2+<CR>
 
 "map <F2> :echo expand("%:p")<CR>
-map <F2> :DSplit<CR>
+map <F2> :let @" = expand("%:p")<CR>
 map <F3> :cn<CR>
 map <F4> :cp<CR>
+map <F7> :set wrap!<CR>
 
-" $this->p($var);
-autocmd FileType php ab ec_debug GC_Utils_Ex::gfDebugLog();<left><left>
-autocmd FileType php ab ec_print SC_Utils::sfPrintR();<left><left>
-autocmd FileType php ab var_dump echo "<pre>";var_dump();echo "</pre>";
-autocmd FileType php ab trace debug_print_backtrace();
+"ab debuglog GC_Utils_Ex::gfPrintLog();<left><left>
+ab eclog GC_Utils_Ex::gfDebugLog("---- TRACE ----");
+ab ecprint SC_Utils::sfPrintR();
+ab var_dump echo "<pre style='text-align:left;'>";<CR>var_dump($_SESSION);<CR>echo "</pre>";
+ab tracelog $this->log("---- TRACE LOG ----".__LINE__);
+ab debugcon <!--{debug}-->
+ab printlog $this->p();<LEFT><LEFT>
+ab YDATE =strftime("%Y/%m/%d")<CR>
+ab dumptemplatevar <pre><!--{php}-->print_r(get_template_vars());<!--{/php}--></pre>
+
+" print_r
+" debug_print_backtrace();
+" <!-- {$smarty.session} -->
+" <!-- {$smarty.server|@debug_print_var} -->
+" <!-- {$smarty.debugging} -->
+
+"autocmd FileType php set et
+"autocmd FileType html set et
+"autocmd FileType smarty set et
+
 
 " PHP perfomance
 "$time_start = microtime(true);
@@ -37,6 +54,82 @@ autocmd FileType php ab trace debug_print_backtrace();
 
 "nmap ,e :NERDTreeToggle<CR>
 "noremap <C-e> :Unite buffer<CR>  " vim 7.2 では利用できない
+nmap ,e :Sexplore<CR>
+
+
+command! Backup call Backup()
+function! Backup()
+  let sfile = expand("%:p")
+  execute "write " . sfile . "~"
+endfunc
+
+
+" ---- ECCUBE CUSTOM ----
+command! EcTemplate call EccubeTemplate()
+command! EcCarrier call EccubeChangeCarrier()
+" 引数が与えられるとレジスタのファイルパスをコピーする
+command! -nargs=? EcInheritance call EccubeToggleInheritance(<args>)
+
+function! EccubeTemplate()
+  "let sfile = expand("%:p")
+  let sfile = expand("%:f")
+  let s1 = fnamemodify(sfile, ":h")
+  let s2 = fnamemodify(sfile, ":h:h")
+  let last_path = substitute(s1, s2, "", "")
+
+  let tpl_path = 'data/Smarty/templates'
+  let def_tpl = '/default2'
+
+  let efile = substitute(sfile, "_extends", "", "g")
+
+  if match(efile, "admin") == -1
+    let path = tpl_path . def_tpl
+  else
+    let path = tpl_path . '/admin'
+  endif
+  let path = path . last_path
+
+  echo path
+  execute "new " . path
+
+endfunction
+
+function! EccubeChangeCarrier()
+  let sfile = expand("%:f")
+  if match(sfile, "default2") != -1
+    let sfile = substitute(sfile, "default2", "sphone2", "")
+  else
+    let sfile = substitute(sfile, "sphone2", "default2", "")
+  endif
+  let @" = sfile
+  execute "new ".sfile
+endfunc
+
+function! EccubeToggleInheritance(...)
+  " 擬似デフォルト引数
+  "let default_arg = a:0 >= 1 ? a:1 : "Hello!!"
+
+  "let fpath = expand("%:p")
+  let fpath = expand("%:f")
+  if match(fpath, "class_extends") == -1
+    let fpath = substitute(fpath, "class", "class_extends", "")
+    let fpath = substitute(fpath, "pages",  "page_extends",  "")
+    let ext = expand("%:e")
+    let fpath = substitute(fpath, ".".ext, "_Ex.php", "")
+
+  else
+    let fpath = substitute(fpath, "page", "pages", "")
+    let fpath = substitute(fpath, "_extends", "", "g")
+    let fpath = substitute(fpath, "_Ex.php", ".php", "")
+  endif
+
+  let @" = fpath
+  if a:0 < 1
+    " no args
+    execute "new " . fpath
+  endif
+endfunction
+" ---- ECCUBE CUSTOM ----
 
 
 if has('win32')
@@ -109,7 +202,6 @@ if has('win32')
   " 最近使ったファイルの一覧
   " noremap <C-Z> :Unite file_mru<CR>
 
-  "ab debuglog GC_Utils_Ex::gfDebugLog();<left><left>
   " $this->p($var);
   "ab debugprint SC_Utils::sfPrintR();<left><left>
 
@@ -166,7 +258,6 @@ if has('win32')
   NeoBundleFetch 'vim-scripts/taglist.vim'
   NeoBundleFetch 'Shougo/unite.vim'
   NeoBundleFetch 'alvan/vim-closetag'
-  NeoBundleFetch 'vim-scripts/Syntastic'
   NeoBundleFetch 'vim-scripts/Syntastic'
 
   " My Bundles here:
