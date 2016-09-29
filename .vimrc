@@ -1,13 +1,18 @@
 
+set ff=unix
+set fenc=utf8
+
 set ic
 set ts=2
 set sw=2
 set et
 set nowrapscan
-set noequalalways
+set noequalalways      " 全てのウィンドウのサイズを同じにする。
+set hlsearch
 
 " set path+=\*\*/\*
 set path=$PWD/**
+
 
 "行が折り返されている場合に対応
 map j gj
@@ -16,8 +21,6 @@ map n nzz
 
 nmap <Space> 
 nmap <C-l> :noh<CR>
-
-" Move Window
 nmap <C-p> <C-w>2-<CR>
 nmap <C-n> <C-w>2+<CR>
 
@@ -27,138 +30,126 @@ map <F3> :cn<CR>
 map <F4> :cp<CR>
 map <F7> :set wrap!<CR>
 
-"ab debuglog GC_Utils_Ex::gfPrintLog();<left><left>
-ab eclog GC_Utils_Ex::gfDebugLog("---- TRACE ----");
-ab ecprint SC_Utils::sfPrintR();
-ab var_dump echo "<pre style='text-align:left;'>";<CR>var_dump($_SESSION);<CR>echo "</pre>";
-ab tracelog $this->log("---- TRACE LOG ----".__LINE__);
-ab debugcon <!--{debug}-->
-ab printlog $this->p();<LEFT><LEFT>
+"nmap ,e :NERDTreeToggle<CR>
+nmap ,e :Sexplore<CR>
+
+" -- unite / no support. under vim 7.2
+if v:version >= 704
+  " 入力モードで開始する
+  " let g:unite_enable_start_insert=1
+
+  " バッファ一覧
+  noremap <C-e> :Unite buffer<CR>
+
+  " ファイル一覧
+  " noremap <C-N> :Unite -buffer-name=file file<CR>
+
+  " 最近使ったファイルの一覧
+  " noremap <C-Z> :Unite file_mru<CR>
+endif
+
+
+"command! Ydate execute "normal! i".strftime("%y/%m/%d ")
 ab YDATE =strftime("%Y/%m/%d")<CR>
+
+" php & eccube abbreviate {{{
+" ログ出力 - data/logs
+ab debuglog GC_Utils_Ex::gfDebugLog("---- TRACE ----");<left><left>
+" GC_Utils_Ex::gfPrintLog("dummy", CUSTOMER_LOG_REALFILE );                 
+ab debugprint SC_Utils::sfPrintR();<left><left>
+
+ab printlog $this->p();<LEFT><LEFT>
+ab trace $this->log("---- TRACE LOG ----".__LINE__);
+
+ab var_dump echo "<pre style='text-align:left;'>";<CR>var_dump($_SESSION);<CR>echo "</pre>";
+ab trace echo "<pre style='text-align:left;'>";<CR>var_dump(debug_print_backtrace());<CR>echo "</pre>";
+ab tempurl <!--{$TPL_URLPATH}-->
+
+ab debugcon <!--{debug}-->
 ab dumptemplatevar <pre><!--{php}-->print_r(get_template_vars());<!--{/php}--></pre>
 
-" print_r
-" debug_print_backtrace();
 " <!-- {$smarty.session} -->
 " <!-- {$smarty.server|@debug_print_var} -->
 " <!-- {$smarty.debugging} -->
 
-"autocmd FileType php set et
-"autocmd FileType html set et
-"autocmd FileType smarty set et
-
-
 " PHP perfomance
 "$time_start = microtime(true);
 "printf("Process Time : %.2f [s]\n", microtime(true) - $time_start);
-
-"nmap ,e :NERDTreeToggle<CR>
-"noremap <C-e> :Unite buffer<CR>  " vim 7.2 では利用できない
-nmap ,e :Sexplore<CR>
+" /php & eccube abbreviate }}}
 
 
+autocmd FileType php ab errlog error_log(print_r($foo));
+autocmd FileType php set noet
+autocmd FileType html set et
+	
 command! Backup call Backup()
 function! Backup()
   let sfile = expand("%:p")
   execute "write " . sfile . "~"
 endfunc
 
-
-" ---- ECCUBE CUSTOM ----
-command! EcTemplate call EccubeTemplate()
-command! EcCarrier call EccubeChangeCarrier()
-" 引数が与えられるとレジスタのファイルパスをコピーする
-command! -nargs=? EcInheritance call EccubeToggleInheritance(<args>)
-
-function! EccubeTemplate()
-  "let sfile = expand("%:p")
-  let sfile = expand("%:f")
-  let s1 = fnamemodify(sfile, ":h")
-  let s2 = fnamemodify(sfile, ":h:h")
-  let last_path = substitute(s1, s2, "", "")
-
-  let tpl_path = 'data/Smarty/templates'
-  let def_tpl = '/default2'
-
-  let efile = substitute(sfile, "_extends", "", "g")
-
-  if match(efile, "admin") == -1
-    let path = tpl_path . def_tpl
-  else
-    let path = tpl_path . '/admin'
-  endif
-  let path = path . last_path
-
-  echo path
-  execute "new " . path
-
-endfunction
-
-function! EccubeChangeCarrier()
-  let sfile = expand("%:f")
-  if match(sfile, "default2") != -1
-    let sfile = substitute(sfile, "default2", "sphone2", "")
-  else
-    let sfile = substitute(sfile, "sphone2", "default2", "")
-  endif
-  let @" = sfile
-  execute "new ".sfile
+command! Tempfile call Tempfile()
+function! Tempfile()
+  let tmpfile = tempname()
+  execute "write! " . tmpfile
 endfunc
 
-function! EccubeToggleInheritance(...)
-  " 擬似デフォルト引数
-  "let default_arg = a:0 >= 1 ? a:1 : "Hello!!"
-
-  "let fpath = expand("%:p")
-  let fpath = expand("%:f")
-  if match(fpath, "class_extends") == -1
-    let fpath = substitute(fpath, "class", "class_extends", "")
-    let fpath = substitute(fpath, "pages",  "page_extends",  "")
-    let ext = expand("%:e")
-    let fpath = substitute(fpath, ".".ext, "_Ex.php", "")
-
+command Reautoassignkey call Reautoassignkey()
+function Reautoassignkey()
+  if &diff 
+    echo "diff mode"
+    map <F3> ]c
+    map <F4> [c
   else
-    let fpath = substitute(fpath, "page", "pages", "")
-    let fpath = substitute(fpath, "_extends", "", "g")
-    let fpath = substitute(fpath, "_Ex.php", ".php", "")
-  endif
-
-  let @" = fpath
-  if a:0 < 1
-    " no args
-    execute "new " . fpath
+    echo "search mode"
+    map <F3> :cn<CR>
+    map <F4> :cp<CR>
   endif
 endfunction
-" ---- ECCUBE CUSTOM ----
 
 
-if has('win32')
-" if has("gui_win32")
+
+" if has('win32')
+if has("gui_win32")
 
   scriptencoding utf-8
 
+  let $DESKTOP=$HOME.'\Desktop'
+  " let $PATH = $PATH . ';C:\Program Files (x86)\Lynx for Win32'
+
   " これないと map のキー指定が有効にならない！！
   set nocompatible
-
-  let $DESKTOP=$HOME.'\Desktop'
-
-  let $PATH = $PATH . ';C:\Program Files (x86)\Lynx for Win32'
-  " let g:ref_phpmanual_cmd="C:/Program Files (x86)/Lynx for Win32/lynx.exe dump %s"
-  " let g:ref_phpmanual_cmd="C:/Program Files (x86)/Lynx for Win32/lynx.exe -cfg=lynx.cfg"
-  " let g:ref_phpmanual_cmd='lynx -dump %s -cfg="C:\\Program\ Files\ (x86)\\Lynx\ for\ Win32\\lynx.cfg"'
-  let g:ref_phpmanual_cmd='lynx -dump %s -cfg="C:/Program Files (x86)/Lynx for Win32/lynx.cfg"'
-  let g:ref_phpmanual_path='$VIM/doc/php-chunked-xhtml'
 
   set guioptions=gmrLtb
   set nobk
   set grepprg=findstr\ /n\ /is
   set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
-  set noundofile
+  " set noundofile
   set undodir=$VIM/undo
-  set noequalalways      " 全てのウィンドウのサイズを同じにする。
   set scrolloff=5        " カーソルの上または下に表示する最小限の行数
-                         " set verbose=9           " autocmdデバッグ用
-  " set path+=.\**
+  set ts=2
+  set sw=2
+  set et
+  " set verbose=9           " autocmdデバッグ用
+
+  set path+=.\**
+  set tags+=C:\RailsInstaller\Ruby2.1.0\lib\ruby\gems\2.1.0\gems/tags
+
+  " -- vim-ref
+  " let g:ref_refe_cmd = $VIM.'/chrome'
+  " let g:ref_phpmanual_cmd='lynx -dump %s -cfg="C:/Program Files (x86)/Lynx for Win32/lynx.cfg"'
+  let g:ref_phpmanual_cmd = $VIM.'/lynx/lynx.exe -dump %s -cfg=/vim/lynx/lynx.cfg'
+  let g:ref_phpmanual_path = $VIM.'/bundle/vim-ref/php-chunked-xhtml'
+
+	" -- syntastic
+	" set statusline+=%#warningmsg#
+	" set statusline+=%{SyntasticStatuslineFlag()}
+	" set statusline+=%*
+  "
+	" let g:syntastic_always_populate_loc_list = 1
+	" let g:syntastic_auto_loc_list = 1
+	" let g:syntastic_check_on_open = 1
+	" let g:syntastic_check_on_wq = 0
 
   " -- emmet
   " let g:user_emmet_settings = { 'variables': { 'lang' : 'ja' } } 
@@ -167,6 +158,8 @@ if has('win32')
   nmap <C-s> :w<CR>
 
   map j :!start gvim<CR>
+  map r :!start gvim -R %<CR>
+  map e :set ro<CR>:!start gvim %<CR>
   map m :set lines=50<CR>:set columns=120<CR>
   map l :set lines=60<CR>
   map h :set columns=160<CR>
@@ -175,54 +168,64 @@ if has('win32')
   map \y g*<esc>:let @*=@/ + 0<enter> 
 
   " vimrc の更新、再読み込みを簡単にするマップ
-  nmap ,s :source $VIM/vimrc_local.vim<CR>:source $VIM/vimrc<CR>
   " nmap ,v :tab args $VIM/vimrc_local.vim $VIM/vimrc<CR>
-  nmap ,v :tabnew $VIM/vimrc_local.vim<CR>
+  nmap ,v :tabnew $USERPROFILE/.vimrc<CR>
+  nmap ,s :source $USERPROFILE/.vimrc<CR>
   nmap ,r :pedit $VIM/vimrc_local_toka.vim<CR>
 
+  map <F5> :new ../api/%<CR>
   nnoremap <F6> :let @* = '%'<CR>
   map <F8> :!start cmd<CR>
-  map <F9> :call OpenExplorer()<CR>
+  map <F9> :call OpenExplorer("")<CR>
 
   " Move Window
+  nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
+  nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
+  " cmap <C-f> <Right>
+  " cmap <C-b> <Left>
   nnoremap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
   nnoremap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
 
-  " ググる
+  " google search
   nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 
 
-  " ---- unite ----
-  " 入力モードで開始する
-  " let g:unite_enable_start_insert=1
-  " バッファ一覧
-  noremap <C-e> :Unite buffer<CR>
-  " ファイル一覧
-  " noremap <C-N> :Unite -buffer-name=file file<CR>
-  " 最近使ったファイルの一覧
-  " noremap <C-Z> :Unite file_mru<CR>
-
-  " $this->p($var);
-  "ab debugprint SC_Utils::sfPrintR();<left><left>
-
   command! Memo       new    $VIM/mynote/memo.changelog
+  command! Sacual     new    C:\Users\nao\Desktop\Sacual\secual.changelog
   command! -nargs=0 LcdCurrent lcd %:p:h
+  command! English    new    C:\Users\nao\Desktop\personal\echat.txt
+  command! EcLink call OpenExplorer("c:\\xampp\\htdocs\\kisekae\\html\\user_data\\packages")
+  command! EcToggle call EccubeToggleByParentToEx()
 
-  function! OpenExplorer()
-  if bufname("%") == ""
+
+  function! OpenExplorer(path)
+    if empty(a:path) != 1
+      execute "!start explorer " . a:path
+    elseif bufname("%") == ""
       execute "!start explorer ."
-  else
+    else
       execute "!start explorer /select," . expand("%")
-  endif
+    endif
   endfunc 
 
-  command! Tempfile call Tempfile()
-  function! Tempfile()
-    let tmpfile = tempname()
-    execute "write! " . tmpfile
-  endfunc
+  function! EccubeToggleByParentToEx()
+    let fpath = expand("%:p")
+    if match(fpath, "class_extends") == -1
+      let fpath = substitute(fpath, "class", "class_extends", "")
+      let fpath = substitute(fpath, "pages",  "page_extends",  "")
+      let ext = expand("%:e")
+      let fpath = substitute(fpath, ".".ext, "_Ex.php", "")
 
-  "ChangeLog \c \o
+    else
+      let fpath = substitute(fpath, "page", "pages", "")
+      let fpath = substitute(fpath, "_extends", "", "g")
+      let fpath = substitute(fpath, "_Ex.php", ".php", "")
+    endif
+
+    execute "new " . fpath
+  endfunction
+
+  " -- ChangeLog \c \o
   "let spec_chglog_format = "%c Naoya Tokashiki <ggtoka@gmail.com>"
   au BufNewFile,BufRead *.changelog setf changelog
   let g:changelog_timeformat = "%Y-%m-%d"
@@ -230,11 +233,11 @@ if has('win32')
 
   autocmd FileType smarty set ts=4
   autocmd FileType smarty set sw=4
+  autocmd FileType ruby ab dbg binding.pry
 
 
-  " ---- NeoBundle ----
+  " ---- NeoBundle ---- {{{
   if has('vim_starting')
-    " Required:
     set runtimepath+=$VIM/bundle/*/
   endif
 
@@ -244,7 +247,6 @@ if has('win32')
   call neobundle#begin(expand('$VIM/bundle/'))
 
   " Let NeoBundle manage NeoBundle
-  " Required:
   NeoBundleFetch 'Shougo/neobundle.vim'
   NeoBundleFetch 'mattn/emmet-vim'
   NeoBundleFetch 'tyru/open-browser.vim'
@@ -259,6 +261,24 @@ if has('win32')
   NeoBundleFetch 'Shougo/unite.vim'
   NeoBundleFetch 'alvan/vim-closetag'
   NeoBundleFetch 'vim-scripts/Syntastic'
+  NeoBundleFetch 'tpope/vim-rails'          " Rails向けのコマンドを提供する
+  NeoBundleFetch 'tpope/vim-endwise'
+  NeoBundleFetch "slim-template/vim-slim"
+  NeoBundleFetch "Chiel92/vim-autoformat"   " pythonは32bit'python-2.7.10.msi'を入れたら動いた
+  NeoBundleFetch 'scrooloose/nerdtree'
+  NeoBundleFetch 'tpope/vim-fugitive'       " git
+  NeoBundleFetch 'gmarik/Vundle.vim'
+	" need setting /xampp/php/php.ini
+  NeoBundleFetch 'joonty/vdebug'            " PHP xdebug - $VIM から python.dll 削除で動いた 
+    " <F2> Step over
+    " <F3> Step in
+    " <F4> Step out
+    " <F5> Run
+    " <F6> Stop/close
+    " <F7> Detach
+    " <F9> Run to cursor
+
+	let g:vdebug_force_ascii = 1
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -266,31 +286,86 @@ if has('win32')
 
   call neobundle#end()
 
-  " Required:
   filetype plugin indent on
 
   " If there are uninstalled bundles found on startup,
   " this will conveniently prompt you to install them.
   NeoBundleCheck
-  " /---- NeoBundle ----
+  " /---- NeoBundle ---- }}}
 
 
+  " open-browser.vim
+  let g:netrw_nogx = 1 " disable netrw's gx mapping.
+  nmap gx <Plug>(openbrowser-smart-search)
+  vmap gx <Plug>(openbrowser-smart-search)
 
-  " スクリプトの一覧表示
-  " :scriptnames
 
-  "メッセージをレジスタ{a-z}にリダイレクトする
-  " :redi[r] @{a-zA-Z}
-  " :redir END
+  " ---- ECCUBE CUSTOM ---- {{{
+  command! EcTemplate call EccubeTemplate()
+  command! EcCarrier call EccubeChangeCarrier()
+  " 引数が与えられるとレジスタのファイルパスをコピーする
+  command! -nargs=? EcInheritance call EccubeToggleInheritance(<args>)
 
-  ":helptags +=$VIM/bundle/emmet-vim/doc
+  function! EccubeTemplate()
+    "let sfile = expand("%:p")
+    let sfile = expand("%:f")
+    let s1 = fnamemodify(sfile, ":h")
+    let s2 = fnamemodify(sfile, ":h:h")
+    let last_path = substitute(s1, s2, "", "")
 
-  " ヘルプコマンド関連
-  "help user-manual
-  "help howto
-  "help index
-  "visuage
-  "exusage
+    let tpl_path = 'data/Smarty/templates'
+    let def_tpl = '/default2'
+
+    let efile = substitute(sfile, "_extends", "", "g")
+
+    if match(efile, "admin") == -1
+      let path = tpl_path . def_tpl
+    else
+      let path = tpl_path . '/admin'
+    endif
+    let path = path . last_path
+
+    echo path
+    execute "new " . path
+
+  endfunction
+
+  function! EccubeChangeCarrier()
+    let sfile = expand("%:f")
+    if match(sfile, "default2") != -1
+      let sfile = substitute(sfile, "default2", "sphone2", "")
+    else
+      let sfile = substitute(sfile, "sphone2", "default2", "")
+    endif
+    let @" = sfile
+    execute "new ".sfile
+  endfunc
+
+  function! EccubeToggleInheritance(...)
+    " 擬似デフォルト引数
+    "let default_arg = a:0 >= 1 ? a:1 : "Hello!!"
+
+    "let fpath = expand("%:p")
+    let fpath = expand("%:f")
+    if match(fpath, "class_extends") == -1
+      let fpath = substitute(fpath, "class", "class_extends", "")
+      let fpath = substitute(fpath, "pages",  "page_extends",  "")
+      let ext = expand("%:e")
+      let fpath = substitute(fpath, ".".ext, "_Ex.php", "")
+
+    else
+      let fpath = substitute(fpath, "page", "pages", "")
+      let fpath = substitute(fpath, "_extends", "", "g")
+      let fpath = substitute(fpath, "_Ex.php", ".php", "")
+    endif
+
+    let @" = fpath
+    if a:0 < 1
+      " no args
+      execute "new " . fpath
+    endif
+  endfunction
+  " /---- ECCUBE CUSTOM ---- }}}
 
 
 elseif has('unix')
@@ -305,19 +380,6 @@ elseif has('unix')
   nmap ,s :source ~/.vimrc<CR>
   nmap ,v :tabnew ~/.vimrc<CR>
 
-  " neobundle
-  if has('vim_starting')
-  if &compatible
-   set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/*/
-  endif
-
-
-  nmap ,v :tabnew ~/.vimrc<CR>
-
   " Required:
   " % git clone https://github.com/koron/cmigemo
   " % cd cmigemo
@@ -328,11 +390,20 @@ elseif has('unix')
   noremap  g/ :<C-u>Migemo<CR>
 
 
-  " Required:
+  " ---- neobundle ---- {{{
+  if has('vim_starting')
+  if &compatible
+   set nocompatible               " Be iMproved
+  endif
+
+  set runtimepath+=~/.vim/bundle/*/
+  endif
+
+  nmap ,v :tabnew ~/.vimrc<CR>
+
   call neobundle#begin(expand('~/.vim/bundle/'))
 
   " Let NeoBundle manage NeoBundle
-  " Required:
   NeoBundleFetch 'Shougo/neobundle.vim'
   NeoBundleFetch 'mattn/emmet-vim'
   NeoBundleFetch 'tomtom/tcomment_vim'
@@ -353,12 +424,13 @@ elseif has('unix')
 
   call neobundle#end()
 
-  " Required:
   filetype plugin indent on
 
   " If there are uninstalled bundles found on startup,
   " this will conveniently prompt you to install them.
   NeoBundleCheck
+  " /---- neobundle ---- }}}
+
 
   colorscheme darkblue
 
@@ -406,4 +478,35 @@ endif
 
 
 
-" vim:ts=2:sw=2
+" -------- Note. --------
+" スクリプトの一覧表示
+" :scriptnames
+
+"メッセージをレジスタ{a-z}にリダイレクトする
+" :redi[r] @{a-zA-Z}
+" :redir END
+
+":helptags +=$VIM/bundle/emmet-vim/doc
+
+" ヘルプコマンド関連
+"help user-manual
+"help howto
+"help index
+"viusage
+"exusage
+
+" big size file open
+"vim -u NONE file_name
+
+" javascript autoformat
+" :Autoformat
+
+" HTML tag delete
+":%s/<.\{-}>//g
+
+" Alignを日本語環境で使用するための設定
+":let g:Align_xstrlen = 3
+
+
+
+" vim:ts=2:sw=2:fdm=marker
