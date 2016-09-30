@@ -3,9 +3,16 @@
 #autoload -U compinit
 #compinit
 
-#補完でカラーを使用する
-autoload colors
+# 補完でカラーを使用する
+autoload -U colors; colors
+
 zstyle ':completion:*' list-colors "${LS_COLORS}"
+zstyle ':completion:*:default' menu select=1
+#  complete ignore character
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# sudo の後ろでコマンド名を補完する
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+    /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
@@ -26,17 +33,22 @@ alias vi='vim'
 alias vizshrc='vi ~/.zshrc ; source ~/.zshrc'
 alias vivimrc='vi ~/.vimrc'
 alias vinginx='vi /etc/nginx/conf.d'
+alias viblog='vi /mnt/hgfs/railsprj/blog/source/blog/posts/'
 #alias tree='tree --charset=x'
 alias rc='rclone'
 alias ff='find -iname'
-alias cdsf='cd /usr/share/nginx/html'
-alias cdupt='cd /home/uptjp/www'
-alias cdtool='/home/uptjp/www/tool'
 # alias beste='nice -n 19 ionice -c 3'
 alias gits='git status'
 #alias lsd='ls -l --color=auto html|grep ^d'
+alias rm='rm -i'
 alias mv='mv -i'
+alias cp='cp -i'
+alias psg='ps aux|grep'
+alias be='bundle exec'
 
+
+PROMPT="${USER}@%m:%%"
+RPROMPT='[%~]'
 
 # 履歴の保存場所
 HISTFILE=~/.zsh_history
@@ -50,6 +62,12 @@ SAVEHIST=100000
 # ディレクトリ最大数
 DIRSTACKSIZE=100
 
+# ^W - delete separate slash(/) 
+WORDCHARS="`echo $WORDCHARS|sed 's!/!!'`"
+
+
+# ビープ音を鳴らさない
+setopt no_beep
 
 # 履歴ファイルに時刻を記録
 setopt extended_history
@@ -89,37 +107,45 @@ setopt hist_find_no_dups
 # 先頭空白の場合、履歴に残さない
 setopt hist_ignore_space
 
-# ビープ音を鳴らさない
-setopt no_beep
+# ヒストリに保存するときに余分なスペースを削除する
+setopt hist_reduce_blanks
 
-# ^W - delete separate slash(/) 
-WORDCHARS="`echo $WORDCHARS|sed 's!/!!'`"
+# コマンド自動補正機能
+setopt correct
 
-#  complete ignore character
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# 補完候補を詰めて表示
+setopt list_packed
 
 
-# ^で、cd ..
+
+# ^j で、cd ..
 function cdup() {
-echo
-cd ..
-#zle reset-prompt
-zle accept-line
+  echo
+  cd ..
+  #zle reset-prompt
+  zle accept-line
 }
 zle -N cdup
-#bindkey '\^' cdup
+bindkey '^j' cdup
 
 #bindkey -L 	show shortcut keys. written 'man zshzle'
 
 
-PROMPT="${USER}@%m:%%"
-RPROMPT='[%~]'
-
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
 
 if [ -d "$HOME/.rbenv/bin" ] ; then
   PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
+
+
+# マッチしたコマンドのヒストリを表示できるようにする
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
 
 
 
@@ -163,6 +189,8 @@ fi
 # zle -N no-magic-abbrev-expand
 # bindkey " " magic-abbrev-expand
 # bindkey "^x " no-magic-abbrev-expand
+
+
 
 
 
