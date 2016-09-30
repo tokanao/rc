@@ -32,6 +32,8 @@ map <F7> :set wrap!<CR>
 
 "nmap ,e :NERDTreeToggle<CR>
 nmap ,e :Sexplore<CR>
+nmap ,v :tabnew ~/.vimrc<CR>
+nmap ,s :source ~/.vimrc<CR>
 
 " -- unite / no support. under vim 7.2
 if v:version >= 704
@@ -94,8 +96,8 @@ function! Tempfile()
   execute "write! " . tmpfile
 endfunc
 
-command Reautoassignkey call Reautoassignkey()
-function Reautoassignkey()
+command! Reautoassignkey call Reautoassignkey()
+function! Reautoassignkey()
   if &diff 
     echo "diff mode"
     map <F3> ]c
@@ -154,6 +156,7 @@ if has("gui_win32")
   " -- emmet
   " let g:user_emmet_settings = { 'variables': { 'lang' : 'ja' } } 
   let g:user_emmet_settings = { 'indentation' : '  ' }
+  "let g:user_emmet_leader_key='<c-t>'
 
   nmap <C-s> :w<CR>
 
@@ -167,10 +170,7 @@ if has("gui_win32")
   " VimTip 448: Yank (copy) decimal numbers from hex numbers.
   map \y g*<esc>:let @*=@/ + 0<enter> 
 
-  " vimrc の更新、再読み込みを簡単にするマップ
   " nmap ,v :tab args $VIM/vimrc_local.vim $VIM/vimrc<CR>
-  nmap ,v :tabnew $USERPROFILE/.vimrc<CR>
-  nmap ,s :source $USERPROFILE/.vimrc<CR>
   nmap ,r :pedit $VIM/vimrc_local_toka.vim<CR>
 
   map <F5> :new ../api/%<CR>
@@ -248,7 +248,7 @@ if has("gui_win32")
 
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch 'Shougo/neobundle.vim'
-  NeoBundleFetch 'mattn/emmet-vim'
+  NeoBundleFetch 'mattn/emmet-vim'          " zen-coding
   NeoBundleFetch 'tyru/open-browser.vim'
   NeoBundleFetch 'Townk/vim-autoclose'
   NeoBundleFetch 'jphustman/Align.vim'
@@ -376,9 +376,6 @@ elseif has('unix')
 
   " PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
   "set paste
-
-  nmap ,s :source ~/.vimrc<CR>
-  nmap ,v :tabnew ~/.vimrc<CR>
 
   " Required:
   " % git clone https://github.com/koron/cmigemo
