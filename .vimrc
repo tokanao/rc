@@ -368,7 +368,7 @@ if has("gui_win32")
   " /---- ECCUBE CUSTOM ---- }}}
 
 
-elseif has('unix')
+elseif has('unix') || has('mac')
   " PuTTY mouse setting
   set mouse=a
   set ttymouse=xterm2
@@ -469,6 +469,10 @@ elseif has('unix')
 
     execute "diffsplit " . fpath
   endfunc
+
+  if has('mac')
+    colorscheme default
+  endif
 
 elseif has('mac')
 endif
