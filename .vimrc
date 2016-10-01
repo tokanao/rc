@@ -368,7 +368,7 @@ if has("gui_win32")
   " /---- ECCUBE CUSTOM ---- }}}
 
 
-elseif has('unix') || has('mac')
+elseif has('unix')
   " PuTTY mouse setting
   set mouse=a
   set ttymouse=xterm2
