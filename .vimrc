@@ -7,7 +7,10 @@ set ts=2
 set sw=2
 set et
 set nowrapscan
-set noequalalways      " 全てのウィンドウのサイズを同じにする。
+<<<<<<< Updated upstream
+set noequalalways      " 全てのウィンドウのサイズを同じにしない
+=======
+>>>>>>> Stashed changes
 set hlsearch
 
 " set path+=\*\*/\*
