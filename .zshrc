@@ -24,7 +24,13 @@ bindkey -e
 # alias
 alias -g L='|lv'
 alias -g H='|head -n 20'
-alias ls='ls --color=auto'
+case ${OSTYPE} in
+    darwin*)
+      ;;
+    linux*)
+      alias ls='ls --color=auto'
+      ;;
+esac
 alias la='ls -a'
 alias ll='ls -lt --color=auto --block-size=k'
 #alias lv='less'

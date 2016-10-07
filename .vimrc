@@ -1,4 +1,6 @@
 
+syntax on
+
 set ff=unix
 set fenc=utf8
 
