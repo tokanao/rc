@@ -152,3 +152,6 @@ bindkey "^N" history-beginning-search-forward-end
 
 
 #vim:ts=4:sw=4:et
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

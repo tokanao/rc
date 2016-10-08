@@ -109,6 +109,9 @@ function! Reautoassignkey()
   endif
 endfunction
 
+"nmap ,e :NERDTreeToggle<CR>
+"noremap <C-e> :Unite buffer<CR>  " vim 7.2 では利用できない
+nmap ,e :Sexplore<CR>
 
 
 " if has('win32')
