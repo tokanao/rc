@@ -50,6 +50,7 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 alias psg='ps aux|grep'
+alias hgr='history 0|grep'
 alias be='bundle exec'
 
 
