@@ -1,4 +1,6 @@
 
+syntax on
+
 set ff=unix
 set fenc=utf8
 
@@ -7,7 +9,7 @@ set ts=2
 set sw=2
 set et
 set nowrapscan
-set noequalalways      " 全てのウィンドウのサイズを同じにする。
+set noequalalways      " 全てのウィンドウのサイズを同じにしない
 set hlsearch
 
 " set path+=\*\*/\*
@@ -472,6 +474,10 @@ elseif has('unix')
 
     execute "diffsplit " . fpath
   endfunc
+
+  if has('mac')
+    colorscheme default
+  endif
 
 elseif has('mac')
 endif

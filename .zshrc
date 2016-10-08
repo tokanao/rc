@@ -24,7 +24,13 @@ bindkey -e
 # alias
 alias -g L='|lv'
 alias -g H='|head -n 20'
-alias ls='ls --color=auto'
+case ${OSTYPE} in
+    darwin*)
+      ;;
+    linux*)
+      alias ls='ls --color=auto'
+      ;;
+esac
 alias la='ls -a'
 alias ll='ls -lt --color=auto --block-size=k'
 #alias lv='less'
@@ -38,7 +44,7 @@ alias viblog='vi /mnt/hgfs/railsprj/blog/source/blog/posts/'
 alias rc='rclone'
 alias ff='find -iname'
 # alias beste='nice -n 19 ionice -c 3'
-alias gits='git status'
+alias gits='git status|head -n 20'
 #alias lsd='ls -l --color=auto html|grep ^d'
 alias rm='rm -i'
 alias mv='mv -i'
