@@ -141,6 +141,8 @@ bindkey '^j' cdup
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+# Required:
+# git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
 if [ -d "$HOME/.rbenv/bin" ] ; then
   PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"

@@ -247,8 +247,8 @@ if has("gui_win32")
   endif
 
   " Required:
-  "mkdir ~/.vim/bundle
-  "git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+  " mkdir ~/.vim/bundle
+  " git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
   call neobundle#begin(expand('$VIM/bundle/'))
 
   " Let NeoBundle manage NeoBundle
