@@ -33,7 +33,7 @@ case ${OSTYPE} in
 esac
 alias la='ls -a'
 alias ll='ls -lt --color=auto --block-size=k'
-#alias lv='less'
+[ ! -e "/usr/bin/lv" ] && alias lv='less'
 alias h='history 0'
 alias vi='vim'
 alias vizshrc='vi ~/.zshrc ; source ~/.zshrc'
@@ -136,18 +136,6 @@ zle -N cdup
 bindkey '^j' cdup
 
 #bindkey -L 	show shortcut keys. written 'man zshzle'
-
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-# Required:
-# git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
-if [ -d "$HOME/.rbenv/bin" ] ; then
-  RBENV_ROOT="/usr/local/rbenv"
-  PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
 
 
 # マッチしたコマンドのヒストリを表示できるようにする
