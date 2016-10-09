@@ -144,6 +144,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # Required:
 # git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
 if [ -d "$HOME/.rbenv/bin" ] ; then
+  RBENV_ROOT="/usr/local/rbenv"
   PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
