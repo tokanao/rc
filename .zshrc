@@ -16,6 +16,7 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
+export PAGER=less
 
 # reset & emacs mode
 bindkey -d
@@ -150,6 +151,3 @@ bindkey "^N" history-beginning-search-forward-end
 
 
 #vim:ts=4:sw=4:et
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"

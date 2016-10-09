@@ -23,3 +23,6 @@ bind 'E' eval "encoding euc"  "stuff 'export LANG=ja_JP.EUC-JP\012'"
 
 # ターミナルがリサイズされるのを防ぐ
 termcapinfo xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+
+# mac ターミナルのスクロールで履歴が消えるのを防ぐ
+termcapinfo xterm* ti@:te@
