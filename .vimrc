@@ -492,6 +492,9 @@ elseif has('unix')
     " Move Window
     nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
     nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
+
+    autocmd FocusGained * set transparency=10
+    autocmd FocusLost * set transparency=50
   endif
 endif
 
