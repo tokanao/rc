@@ -119,6 +119,8 @@ nmap ,e :Sexplore<CR>
 " if has('win32')
 if has("gui_win32")
 
+  let ostype = "Win"
+
   scriptencoding utf-8
 
   let $DESKTOP=$HOME.'\Desktop'
@@ -188,8 +190,8 @@ if has("gui_win32")
   nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
   " cmap <C-f> <Right>
   " cmap <C-b> <Left>
-  nnoremap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
-  nnoremap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
+  " nnoremap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
+  " nnoremap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
 
   " google search
   nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
@@ -372,8 +374,13 @@ if has("gui_win32")
   endfunction
   " /---- ECCUBE CUSTOM ---- }}}
 
-
+" elseif has('mac')
+"   let ostype = "Mac"
+"
 elseif has('unix')
+
+  let ostype = system("uname")
+
   " PuTTY mouse setting
   set mouse=a
   set ttymouse=xterm2
@@ -477,9 +484,15 @@ elseif has('unix')
 
   if has('mac')
     colorscheme default
-  endif
 
-elseif has('mac')
+    map m :set lines=40<CR>:set columns=100<CR>
+    map l :set lines=60<CR>
+    map h :set columns=160<CR>
+
+    " Move Window
+    nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
+    nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
+  endif
 endif
 
 

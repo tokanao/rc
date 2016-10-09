@@ -27,6 +27,7 @@ alias -g L='|lv'
 alias -g H='|head -n 20'
 case ${OSTYPE} in
     darwin*)
+      alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim'
       ;;
     linux*)
       alias ls='ls --color=auto'
