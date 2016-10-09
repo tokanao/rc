@@ -4,3 +4,4 @@
 	co = checkout
 	br = branch
 	sb = show-branch
+	st = stash
