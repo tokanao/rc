@@ -63,7 +63,7 @@ ab debuglog GC_Utils_Ex::gfDebugLog("---- TRACE ----");<left><left>
 ab debugprint SC_Utils::sfPrintR();<left><left>
 
 ab printlog $this->p();<LEFT><LEFT>
-ab trace $this->log("---- TRACE LOG ----".__LINE__);
+ab tracelog $this->log("---- TRACE LOG ----".__LINE__);
 
 ab var_dump echo "<pre style='text-align:left;'>";<CR>var_dump($_SESSION);<CR>echo "</pre>";
 ab trace echo "<pre style='text-align:left;'>";<CR>var_dump(debug_print_backtrace());<CR>echo "</pre>";
