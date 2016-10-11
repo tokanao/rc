@@ -396,7 +396,8 @@ elseif has('unix')
   " % make gcc
   " % make gcc-dict
   " % make gcc-install
-  noremap  g/ :<C-u>Migemo<CR>
+  " vim-migemo が使えれば不要
+  " noremap  g/ :<C-u>Migemo<CR>
 
 
   " ---- neobundle ---- {{{
