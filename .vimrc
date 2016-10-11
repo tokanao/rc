@@ -497,7 +497,7 @@ elseif has('unix')
     map <F8> :!open . -a Terminal<CR>
     map <F9> :!open . -a Finder<CR>
 
-    autocmd FocusGained * set transparency=10
+    autocmd FocusGained * set transparency=0
     autocmd FocusLost * set transparency=50
   endif
 endif
