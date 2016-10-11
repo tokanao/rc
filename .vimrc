@@ -426,6 +426,7 @@ elseif has('unix')
   NeoBundleFetch 'chrisbra/SudoEdit.vim'
   NeoBundleFetch 'tpope/vim-fugitive'       " git
   NeoBundleFetch 'evanmiller/nginx-vim-syntax'
+  NeoBundleFetch "slim-template/vim-slim"
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -483,7 +484,7 @@ elseif has('unix')
   endfunc
 
   if has('mac')
-    colorscheme default
+    colorscheme morning
 
     map m :set lines=40<CR>:set columns=100<CR>
     map l :set lines=60<CR>
@@ -492,6 +493,9 @@ elseif has('unix')
     " Move Window
     nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
     nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
+
+    map <F8> :!open . -a Terminal<CR>
+    map <F9> :!open . -a Finder<CR>
 
     autocmd FocusGained * set transparency=10
     autocmd FocusLost * set transparency=50
