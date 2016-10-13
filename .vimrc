@@ -12,14 +12,14 @@ set nowrapscan
 set noequalalways      " 全てのウィンドウのサイズを同じにしない
 set hlsearch
 
-" set path+=\*\*/\*
+set sh=/bin/zsh
 set path=$PWD/**
 
 
 "行が折り返されている場合に対応
-map j gj
-map k gk
-map n nzz
+noremap j gj
+noremap k gk
+noremap n nzz
 
 nmap <Space> 
 nmap <C-l> :noh<CR>
@@ -42,8 +42,8 @@ if v:version >= 704
   " 入力モードで開始する
   " let g:unite_enable_start_insert=1
 
-  " バッファ一覧
-  noremap <C-e> :Unite buffer<CR>
+  " バッファ一覧 - vim 7.2 では利用できない
+  noremap <C-e> :Unite bookmark<CR>
 
   " ファイル一覧
   " noremap <C-N> :Unite -buffer-name=file file<CR>
@@ -112,7 +112,6 @@ function! Reautoassignkey()
 endfunction
 
 "nmap ,e :NERDTreeToggle<CR>
-"noremap <C-e> :Unite buffer<CR>  " vim 7.2 では利用できない
 nmap ,e :Sexplore<CR>
 
 
@@ -386,6 +385,8 @@ elseif has('unix')
   set ttymouse=xterm2
   set grepprg=grep\ -inr\ $*\ /dev/null
 
+  set path+=.\**
+
   " PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
   "set paste
 
@@ -423,6 +424,7 @@ elseif has('unix')
   if v:version >= 704
     NeoBundleFetch 'scrooloose/nerdtree'
     NeoBundleFetch 'Shougo/unite.vim'
+    " NeoBundleFetch 'Shougo/vimfiler'
   endif
   NeoBundleFetch 'chrisbra/SudoEdit.vim'
   NeoBundleFetch 'tpope/vim-fugitive'       " git
@@ -495,8 +497,9 @@ elseif has('unix')
     nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
     nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
 
-    map <F8> :!open . -a Terminal<CR>
-    map <F9> :!open . -a Finder<CR>
+    nnoremap <F6> :let @* = '%'<CR>
+    map <F8> :!open . -a Terminal<CR><CR>
+    map <F9> :!open . -a Finder<CR><CR>
 
     autocmd FocusGained * set transparency=0
     autocmd FocusLost * set transparency=50
