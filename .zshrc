@@ -25,16 +25,7 @@ bindkey -e
 # alias
 alias -g L='|lv'
 alias -g H='|head -n 20'
-case ${OSTYPE} in
-    darwin*)
-      alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim "$@"'
-      ;;
-    linux*)
-      alias ls='ls --color=auto'
-      ;;
-esac
 alias la='ls -a'
-alias ll='ls -lt --color=auto --block-size=k'
 [ ! -e "/usr/bin/lv" ] && alias lv='less'
 alias h='history 0'
 alias vi='vim'
@@ -54,6 +45,16 @@ alias cp='cp -i'
 alias psg='ps aux|grep'
 alias hgr='history 0|grep'
 alias be='bundle exec'
+case ${OSTYPE} in
+  darwin*)
+    alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim "$@"'
+    alias ll='ls -lt'
+    ;;
+  linux*)
+    alias ls='ls --color=auto'
+    alias ll='ls -lt --color=auto --block-size=k'
+    ;;
+esac
 
 
 PROMPT="${USER}@%m:%%"

@@ -37,6 +37,14 @@ nmap ,e :Sexplore<CR>
 nmap ,v :tabnew ~/.vimrc<CR>
 nmap ,s :source ~/.vimrc<CR>
 
+
+" -- ChangeLog \c \o
+"let spec_chglog_format = "%c Naoya Tokashiki <ggtoka@gmail.com>"
+au BufNewFile,BufRead *.changelog setf changelog
+let g:changelog_timeformat = "%Y-%m-%d"
+let g:changelog_username = "Naoya Tokashiki <ggtoka@gmail.com>"
+
+
 " -- unite / no support. under vim 7.2
 if v:version >= 704
   " 入力モードで開始する
@@ -230,12 +238,6 @@ if has("gui_win32")
 
     execute "new " . fpath
   endfunction
-
-  " -- ChangeLog \c \o
-  "let spec_chglog_format = "%c Naoya Tokashiki <ggtoka@gmail.com>"
-  au BufNewFile,BufRead *.changelog setf changelog
-  let g:changelog_timeformat = "%Y-%m-%d"
-  let g:changelog_username = "Naoya Tokashiki <ggtoka@gmail.com>"
 
   autocmd FileType smarty set ts=4
   autocmd FileType smarty set sw=4
@@ -503,6 +505,8 @@ elseif has('unix')
 
     autocmd FocusGained * set transparency=0
     autocmd FocusLost * set transparency=50
+
+    command! Syon new ~/mynote/syon.changelog
   endif
 endif
 
