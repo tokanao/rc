@@ -11,6 +11,7 @@ set et
 set nowrapscan
 set noequalalways      " 全てのウィンドウのサイズを同じにしない
 set hlsearch
+set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
 
 set sh=/bin/zsh
 set path=$PWD/**
@@ -139,7 +140,6 @@ if has("gui_win32")
   set guioptions=gmrLtb
   set nobk
   set grepprg=findstr\ /n\ /is
-  set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
   " set noundofile
   set undodir=$VIM/undo
   set scrolloff=5        " カーソルの上または下に表示する最小限の行数
