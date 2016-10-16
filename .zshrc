@@ -48,7 +48,8 @@ alias be='bundle exec'
 case ${OSTYPE} in
   darwin*)
     alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim "$@"'
-    alias ll='ls -lt'
+    alias ls='ls -G'
+    alias ll='ls -lt -G'
     ;;
   linux*)
     alias ls='ls --color=auto'

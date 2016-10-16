@@ -499,6 +499,8 @@ elseif has('unix')
     nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
     nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
 
+    map ¥ <Leader>
+
     nnoremap <F6> :let @* = '%'<CR>
     map <F8> :!open . -a Terminal<CR><CR>
     map <F9> :!open . -a Finder<CR><CR>
