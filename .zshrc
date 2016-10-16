@@ -127,6 +127,9 @@ setopt correct
 # 補完候補を詰めて表示
 setopt list_packed
 
+# ^ ~ を使用して除外パターンを利用する
+setopt extended_glob
+
 
 
 # ^j で、cd ..
@@ -148,6 +151,12 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
+
+
+# chgrp, chown, ln, mkdir, mv, rm, rmdir, sync 
+# zsh: argument list too long: mv
+# getconf ARG_MAX
+zmodload zsh/files
 
 
 

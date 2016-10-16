@@ -13,7 +13,7 @@ set noequalalways      " 全てのウィンドウのサイズを同じにしな�
 set hlsearch
 set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
 
-set sh=/bin/zsh
+set sh=/bin/zsh 
 set path=$PWD/**
 
 
@@ -432,6 +432,7 @@ elseif has('unix')
   NeoBundleFetch 'tpope/vim-fugitive'       " git
   NeoBundleFetch 'evanmiller/nginx-vim-syntax'
   NeoBundleFetch "slim-template/vim-slim"
+  " NeoBundleFetch "vim-scripts/Conque-Shell"
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -499,10 +500,10 @@ elseif has('unix')
     nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
     nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
 
-    map ¥ <Leader>
+    " map ¥ <Leader>
 
     nnoremap <F6> :let @* = '%'<CR>
-    map <F8> :!open . -a Terminal<CR><CR>
+    map <F8> :!open . -a iTerm<CR><CR>
     map <F9> :!open . -a Finder<CR><CR>
 
     autocmd FocusGained * set transparency=0
