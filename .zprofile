@@ -6,6 +6,7 @@ if [ -d "$HOME/.rbenv/bin" ] ; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
+
 # Required:
 # git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
 # git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
