@@ -287,7 +287,7 @@ if has("gui_win32")
     " <F7> Detach
     " <F9> Run to cursor
 
-	" let g:vdebug_force_ascii = 1
+	let g:vdebug_force_ascii = 1
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -501,7 +501,7 @@ elseif has('unix')
     nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
     nmap <C-b> :winpos =getwinposx() - 30<CR> =getwinposy()<CR><CR>
 
-    " map ¥ <Leader>
+    " map \ <Leader>
 
     nnoremap <F6> :let @* = '%'<CR>
     map <F8> :!open . -a iTerm<CR><CR>
