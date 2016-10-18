@@ -77,6 +77,7 @@ ab tracelog $this->log("---- TRACE LOG ----".__LINE__);
 ab var_dump echo "<pre style='text-align:left;'>";<CR>var_dump($_SESSION);<CR>echo "</pre>";
 ab trace echo "<pre style='text-align:left;'>";<CR>var_dump(debug_print_backtrace());<CR>echo "</pre>";
 ab tempurl <!--{$TPL_URLPATH}-->
+" get_defined_vars()
 
 ab debugcon <!--{debug}-->
 ab dumptemplatevar <pre><!--{php}-->print_r(get_template_vars());<!--{/php}--></pre>
@@ -286,7 +287,7 @@ if has("gui_win32")
     " <F7> Detach
     " <F9> Run to cursor
 
-	let g:vdebug_force_ascii = 1
+	" let g:vdebug_force_ascii = 1
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -543,6 +544,9 @@ endif
 
 " Alignを日本語環境で使用するための設定
 ":let g:Align_xstrlen = 3
+
+" ヘルプ全文検索
+":helpgrep <keyword>
 
 
 
