@@ -507,8 +507,8 @@ elseif has('unix')
     map <F8> :!open . -a iTerm<CR><CR>
     map <F9> :!open . -a Finder<CR><CR>
 
-    autocmd FocusGained * set transparency=0
-    autocmd FocusLost * set transparency=50
+    " autocmd FocusGained * set transparency=0
+    " autocmd FocusLost * set transparency=50
 
     command! Syon new ~/mynote/syon.changelog
   endif
