@@ -421,8 +421,6 @@ elseif has('unix')
   let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
   " let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
   let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c %s']}
-  " let g:quickrun_config['js2coffee'] = {'command' : 'js2coffee', 'exec' : ['%c %s']}
-  let g:quickrun_config['html'] = {'command' : 'html2slim', 'exec' : ['%c %s']}
 
   call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -450,6 +448,8 @@ elseif has('unix')
   " cru	"upper_case" → "UPPER_CASE"
   NeoBundleFetch "thinca/vim-quickrun"
   NeoBundleFetch "kchmck/vim-coffee-script"
+  NeoBundleFetch "davydovanton/vim-html2slim"
+  NeoBundle "https://github.com/JarrodCTaylor/vim-js2coffee"
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
