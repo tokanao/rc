@@ -415,6 +415,15 @@ elseif has('unix')
 
   nmap ,v :tabnew ~/.vimrc<CR>
 
+  " qq で現在のファイルを実行
+  silent! nmap <unique>qq <Plug>(quickrun)
+  let g:quickrun_config = {}
+  let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
+  " let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
+  let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c %s']}
+  " let g:quickrun_config['js2coffee'] = {'command' : 'js2coffee', 'exec' : ['%c %s']}
+  let g:quickrun_config['html'] = {'command' : 'html2slim', 'exec' : ['%c %s']}
+
   call neobundle#begin(expand('~/.vim/bundle/'))
 
   " Let NeoBundle manage NeoBundle
@@ -434,6 +443,13 @@ elseif has('unix')
   NeoBundleFetch 'evanmiller/nginx-vim-syntax'
   NeoBundleFetch "slim-template/vim-slim"
   " NeoBundleFetch "vim-scripts/Conque-Shell"
+  NeoBundleFetch "tpope/vim-abolish"        " camelcase <-> snakecase
+  " crs	"SnakeCase" → "snake_case"
+  " crm	"mixed_case" → "MixedCase"
+  " crc	"camel_case" → "camelCase"
+  " cru	"upper_case" → "UPPER_CASE"
+  NeoBundleFetch "thinca/vim-quickrun"
+  NeoBundleFetch "kchmck/vim-coffee-script"
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
