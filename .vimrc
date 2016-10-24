@@ -99,7 +99,11 @@ autocmd FileType html set et
 command! Backup call Backup()
 function! Backup()
   let sfile = expand("%:p")
-  execute "write " . sfile . "~"
+  let sfile = sfile . "~"
+  while filereadable(sfile)
+    let sfile = sfile . "~"
+  endwhile
+  execute "write ".sfile
 endfunc
 
 command! Tempfile call Tempfile()
@@ -449,7 +453,7 @@ elseif has('unix')
   NeoBundleFetch "thinca/vim-quickrun"
   NeoBundleFetch "kchmck/vim-coffee-script"
   NeoBundleFetch "davydovanton/vim-html2slim"
-  NeoBundle "https://github.com/JarrodCTaylor/vim-js2coffee"
+  NeoBundleFetch "JarrodCTaylor/vim-js2coffee"
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -520,8 +524,10 @@ elseif has('unix')
     " map \ <Leader>
 
     nnoremap <F6> :let @* = '%'<CR>
-    map <F8> :!open . -a iTerm<CR><CR>
-    map <F9> :!open . -a Finder<CR><CR>
+    " map <F8> :!open . -a iTerm<CR><CR>
+    " map <F9> :!open . -a Finder
+    map <F8> :!open =expand("%:p:h")<CR> -a iTerm<CR><CR>
+    map <F9> :!open =expand("%:p:h")<CR> -a Finder<CR><CR>
 
     " autocmd FocusGained * set transparency=0
     " autocmd FocusLost * set transparency=50
