@@ -13,7 +13,6 @@ set noequalalways      " 全てのウィンドウのサイズを同じにしな�
 set hlsearch
 set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
 
-set sh=/bin/zsh 
 set path=$PWD/**
 
 
@@ -382,6 +381,8 @@ if has("gui_win32")
 elseif has('unix')
 
   let ostype = system("uname")
+
+  set sh=/bin/zsh 
 
   " PuTTY mouse setting
   set mouse=a
