@@ -98,7 +98,11 @@ autocmd FileType html set et
 command! Backup call Backup()
 function! Backup()
   let sfile = expand("%:p")
-  execute "write " . sfile . "~"
+  let sfile = sfile . "~"
+  while filereadable(sfile)
+    let sfile = sfile . "~"
+  endwhile
+  execute "write ".sfile
 endfunc
 
 command! Tempfile call Tempfile()
@@ -416,6 +420,13 @@ elseif has('unix')
 
   nmap ,v :tabnew ~/.vimrc<CR>
 
+  " qq で現在のファイルを実行
+  silent! nmap <unique>qq <Plug>(quickrun)
+  let g:quickrun_config = {}
+  let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
+  " let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
+  let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c %s']}
+
   call neobundle#begin(expand('~/.vim/bundle/'))
 
   " Let NeoBundle manage NeoBundle
@@ -435,6 +446,15 @@ elseif has('unix')
   NeoBundleFetch 'evanmiller/nginx-vim-syntax'
   NeoBundleFetch "slim-template/vim-slim"
   " NeoBundleFetch "vim-scripts/Conque-Shell"
+  NeoBundleFetch "tpope/vim-abolish"        " camelcase <-> snakecase
+  " crs	"SnakeCase" → "snake_case"
+  " crm	"mixed_case" → "MixedCase"
+  " crc	"camel_case" → "camelCase"
+  " cru	"upper_case" → "UPPER_CASE"
+  NeoBundleFetch "thinca/vim-quickrun"
+  NeoBundleFetch "kchmck/vim-coffee-script"
+  NeoBundleFetch "davydovanton/vim-html2slim"
+  NeoBundleFetch "JarrodCTaylor/vim-js2coffee"
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -505,11 +525,13 @@ elseif has('unix')
     " map \ <Leader>
 
     nnoremap <F6> :let @* = '%'<CR>
-    map <F8> :!open . -a iTerm<CR><CR>
-    map <F9> :!open . -a Finder<CR><CR>
+    " map <F8> :!open . -a iTerm<CR><CR>
+    " map <F9> :!open . -a Finder
+    map <F8> :!open =expand("%:p:h")<CR> -a iTerm<CR><CR>
+    map <F9> :!open =expand("%:p:h")<CR> -a Finder<CR><CR>
 
-    autocmd FocusGained * set transparency=0
-    autocmd FocusLost * set transparency=50
+    " autocmd FocusGained * set transparency=0
+    " autocmd FocusLost * set transparency=50
 
     command! Syon new ~/mynote/syon.changelog
   endif
