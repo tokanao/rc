@@ -129,6 +129,21 @@ endfunction
 nmap ,e :Sexplore<CR>
 
 
+" -- syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Required:
+" gem install rubocop
+let g:syntastic_ruby_checkers=['rubocop', 'mri']
+
+
 " if has('win32')
 if has("gui_win32")
 
@@ -161,16 +176,6 @@ if has("gui_win32")
   " let g:ref_phpmanual_cmd='lynx -dump %s -cfg="C:/Program Files (x86)/Lynx for Win32/lynx.cfg"'
   let g:ref_phpmanual_cmd = $VIM.'/lynx/lynx.exe -dump %s -cfg=/vim/lynx/lynx.cfg'
   let g:ref_phpmanual_path = $VIM.'/bundle/vim-ref/php-chunked-xhtml'
-
-	" -- syntastic
-	" set statusline+=%#warningmsg#
-	" set statusline+=%{SyntasticStatuslineFlag()}
-	" set statusline+=%*
-  "
-	" let g:syntastic_always_populate_loc_list = 1
-	" let g:syntastic_auto_loc_list = 1
-	" let g:syntastic_check_on_open = 1
-	" let g:syntastic_check_on_wq = 0
 
   " -- emmet
   " let g:user_emmet_settings = { 'variables': { 'lang' : 'ja' } } 
@@ -454,6 +459,8 @@ elseif has('unix')
   NeoBundleFetch "davydovanton/vim-html2slim"
   NeoBundleFetch "JarrodCTaylor/vim-js2coffee"
   NeoBundleFetch 'jphustman/Align.vim'
+  NeoBundleFetch 'scrooloose/syntastic'
+  NeoBundleFetch 'ngmy/vim-rubocop'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -570,6 +577,8 @@ endif
 
 " ヘルプ全文検索
 ":helpgrep <keyword>
+" 実行確認
+"echo executable('rubocop')
 
 
 
