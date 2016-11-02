@@ -28,3 +28,7 @@ fi
 if [ -d "/usr/local/lib/node_modules/npm/bin" ] ; then
   export PATH=/usr/local/lib/node_modules/npm/bin:$PATH
 fi
+
+if [ -d "/Users/toka/database/data" ] ; then
+  export PGDATA=/Users/toka/database/data
+fi

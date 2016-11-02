@@ -13,6 +13,7 @@ set noequalalways      " 全てのウィンドウのサイズを同じにしな�
 set hlsearch
 set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
 
+set sh=/bin/zsh 
 set path=$PWD/**
 
 
@@ -386,8 +387,6 @@ elseif has('unix')
 
   let ostype = system("uname")
 
-  set sh=/bin/zsh 
-
   " PuTTY mouse setting
   set mouse=a
   set ttymouse=xterm2
@@ -421,10 +420,9 @@ elseif has('unix')
   nmap ,v :tabnew ~/.vimrc<CR>
 
   " qq で現在のファイルを実行
-  silent! nmap <unique>qq <Plug>(quickrun)
+  " silent! nmap <unique>qq <Plug>(quickrun)
   let g:quickrun_config = {}
   let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
-  " let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
   let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c %s']}
 
   call neobundle#begin(expand('~/.vim/bundle/'))
@@ -455,6 +453,7 @@ elseif has('unix')
   NeoBundleFetch "kchmck/vim-coffee-script"
   NeoBundleFetch "davydovanton/vim-html2slim"
   NeoBundleFetch "JarrodCTaylor/vim-js2coffee"
+  NeoBundleFetch 'jphustman/Align.vim'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -515,7 +514,7 @@ elseif has('unix')
     colorscheme morning
 
     map m :set lines=40<CR>:set columns=100<CR>
-    map l :set lines=60<CR>
+    map l :set lines=60<CR>:set columns=100<CR>
     map h :set columns=160<CR>
 
     " Move Window
@@ -529,6 +528,7 @@ elseif has('unix')
     " map <F9> :!open . -a Finder
     map <F8> :!open =expand("%:p:h")<CR> -a iTerm<CR><CR>
     map <F9> :!open =expand("%:p:h")<CR> -a Finder<CR><CR>
+    map r :!open -a MacVim -n =expand("%:p")<CR>
 
     " autocmd FocusGained * set transparency=0
     " autocmd FocusLost * set transparency=50

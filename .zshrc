@@ -1,10 +1,5 @@
 # Created by newuser for 5.0.2
 #
-#autoload -U compinit
-#compinit
-
-# 補完でカラーを使用する
-autoload -U colors; colors
 
 zstyle ':completion:*' list-colors "${LS_COLORS}"
 zstyle ':completion:*:default' menu select=1
@@ -30,7 +25,7 @@ alias la='ls -a'
 [ ! -e "/usr/bin/lv" ] && alias lv='less'
 alias h='history 0'
 alias vi='vim'
-alias vizshrc='vi ~/.zshrc ; source ~/.zshrc'
+alias vizshrc='vi ~/.zprofile ~/.zshenv ~/.zshrc ; source ~/.zshrc'
 alias vivimrc='vi ~/.vimrc'
 alias vinginx='vi /etc/nginx/conf.d'
 alias viblog='vi /mnt/hgfs/railsprj/blog/source/blog/posts/'
@@ -38,7 +33,8 @@ alias viblog='vi /mnt/hgfs/railsprj/blog/source/blog/posts/'
 alias rc='rclone'
 alias ff='find -iname'
 # alias beste='nice -n 19 ionice -c 3'
-alias gits='sudo git status|head -n 20'
+# alias gits='git status|head -n 20'
+alias gits='git status'
 #alias lsd='ls -l --color=auto html|grep ^d'
 alias rm='rm -i'
 alias mv='mv -i'
@@ -60,18 +56,27 @@ esac
 
 
 PROMPT="${USER}@%m:%%"
-RPROMPT='[%~]'
+# RPROMPT='[%~]'
+RPROMPT='[%c]'
+# RPROMPT="%{${fg[blue]}%}[%c]%{${reset_color}%}"
 
-# 履歴の保存場所
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { vcs_info }
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+
+PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
+SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
+
+
 HISTFILE=~/.zsh_history
-
-# メモリ内の履歴の数
 HISTSIZE=20000
-
-# 保存される履歴の数
 SAVEHIST=100000
-
-# ディレクトリ最大数
 DIRSTACKSIZE=100
 
 # ^W - delete separate slash(/) 
@@ -158,8 +163,6 @@ bindkey "^N" history-beginning-search-forward-end
 # zsh: argument list too long: mv
 # getconf ARG_MAX
 zmodload zsh/files
-
-
 
 
 

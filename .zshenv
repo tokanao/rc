@@ -8,5 +8,11 @@
 autoload -Uz compinit
 compinit
 
-# zargs -- **/*rb grep -i <keyword>
+# zargs -- **/*rb -- grep -i <keyword>
 autoload zargs
+
+# 補完でカラーを使用する
+autoload -U colors; colors
+
+
+path=(/usr/local/Cellar/postgresql-9.2/9.2.18/bin(N-/) $path)
