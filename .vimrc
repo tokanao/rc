@@ -130,18 +130,18 @@ nmap ,e :Sexplore<CR>
 
 
 " -- syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
-" Required:
-" gem install rubocop
-let g:syntastic_ruby_checkers=['rubocop', 'mri']
+"
+" " Required:
+" " gem install rubocop
+" let g:syntastic_ruby_checkers=['rubocop', 'mri']
 
 
 " if has('win32')
@@ -577,6 +577,7 @@ endif
 
 " ヘルプ全文検索
 ":helpgrep <keyword>
+
 " 実行確認
 "echo executable('rubocop')
 
