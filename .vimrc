@@ -456,7 +456,9 @@ elseif has('unix')
   " cru	"upper_case" → "UPPER_CASE"
   NeoBundleFetch "thinca/vim-quickrun"
   NeoBundleFetch "kchmck/vim-coffee-script"
-  NeoBundleFetch "davydovanton/vim-html2slim"
+  if executable('rubocop')
+    NeoBundleFetch "davydovanton/vim-html2slim"
+  endif
   NeoBundleFetch "JarrodCTaylor/vim-js2coffee"
   NeoBundleFetch 'jphustman/Align.vim'
   NeoBundleFetch 'scrooloose/syntastic'
