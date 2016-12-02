@@ -581,6 +581,8 @@ endif
 " 実行確認
 "echo executable('rubocop')
 
+" Ruby select inside method: v + i + m
+
 
 
 " vim:ts=2:sw=2:fdm=marker
