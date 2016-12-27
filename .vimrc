@@ -95,6 +95,11 @@ ab dumptemplatevar <pre><!--{php}-->print_r(get_template_vars());<!--{/php}--></
 autocmd FileType php ab errlog error_log(print_r($foo));
 autocmd FileType php set noet
 autocmd FileType html set et
+autocmd FileType ruby ab perform start_time = Time.now; p "処理概要 #{Time.now - start_time}s"
+autocmd FileType ruby ab logd logger.debug("DEBUG: params => #{params}")
+autocmd FileType ruby ab deprecated # HACK: deprecated.
+autocmd FileType ruby ab bind binding.pry
+
 	
 command! Backup call Backup()
 function! Backup()
@@ -463,6 +468,7 @@ elseif has('unix')
   NeoBundleFetch 'jphustman/Align.vim'
   NeoBundleFetch 'scrooloose/syntastic'
   NeoBundleFetch 'ngmy/vim-rubocop'
+  NeoBundleFetch 'vim-scripts/SQLUtilities'
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -520,6 +526,8 @@ elseif has('unix')
   endfunc
 
   if has('mac')
+    set backupdir=/tmp
+
     colorscheme morning
 
     map m :set lines=40<CR>:set columns=100<CR>
@@ -538,11 +546,14 @@ elseif has('unix')
     map <F8> :!open =expand("%:p:h")<CR> -a iTerm<CR><CR>
     map <F9> :!open =expand("%:p:h")<CR> -a Finder<CR><CR>
     map r :!open -a MacVim -n =expand("%:p")<CR>
+    map g :gr  app/**/*rb<CR>
+    map G :tabnew +gr\ \ app/**/*rb
 
     " autocmd FocusGained * set transparency=0
     " autocmd FocusLost * set transparency=50
 
-    command! Syon new ~/mynote/syon.changelog
+    command! Syon     new ~/mynote/syon.changelog
+    command! Snippet  new ~/mynote/snippet.txt
   endif
 endif
 
