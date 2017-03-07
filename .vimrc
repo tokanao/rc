@@ -540,6 +540,7 @@ elseif has('unix')
 
     " map \ <Leader>
 
+    silent! nmap <F5> <Plug>(quickrun)
     nnoremap <F6> :let @* = '%'<CR>
     " map <F8> :!open . -a iTerm<CR><CR>
     " map <F9> :!open . -a Finder
