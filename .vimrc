@@ -597,6 +597,9 @@ endif
 
 " Ruby select inside method: v + i + m
 
+" 標準出力を編集
+" mdfind -onlyin ./ Schemafile | vi -
+
 
 
 " vim:ts=2:sw=2:fdm=marker
