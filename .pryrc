@@ -11,7 +11,7 @@ if defined?(PryByebug)
   Pry.commands.alias_command 's', 'step'
   Pry.commands.alias_command 'n', 'next'
   Pry.commands.alias_command 'f', 'finish'
-  /* Pry.commands.alias_command 'ss', 'show-stack'   # need pry-stack_explorer */
+  # Pry.commands.alias_command 'ss', 'show-stack'   # need pry-stack_explorer
   Pry.editor = 'vim'
 end
 
