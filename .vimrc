@@ -146,7 +146,15 @@ let g:syntastic_check_on_wq = 0
 "
 " " Required:
 " " gem install rubocop
-" let g:syntastic_ruby_checkers=['rubocop', 'mri']
+let g:syntastic_ruby_checkers=['rubocop', 'mri']
+
+" au FileType ruby if exists('b:rails_root') |
+"   \ let b:syntastic_ruby_rubocop_options = '--rails' | endif
+"
+" let g:vimrubocop_config = '~/.rubocop.yml'
+
+" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+" let g:syntastic_ruby_checkers = ['rubocop']
 
 
 " if has('win32')
@@ -467,8 +475,16 @@ elseif has('unix')
   NeoBundleFetch "JarrodCTaylor/vim-js2coffee"
   NeoBundleFetch 'jphustman/Align.vim'
   NeoBundleFetch 'scrooloose/syntastic'
+  " NeoBundle 'ngmy/vim-rubocop'
   NeoBundleFetch 'ngmy/vim-rubocop'
   NeoBundleFetch 'vim-scripts/SQLUtilities'
+
+  NeoBundle 'mattn/webapi-vim'
+  NeoBundle 'mattn/gist-vim'
+    let g:github_user = 'tokanao'
+    let g:github_token = 'd0408c10d37cf8ca6d797e4f25446b5260e7fd30'
+    " let g:gist_curl_options = "-k"
+    let g:gist_detect_filetype = 1
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
