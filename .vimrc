@@ -13,7 +13,6 @@ set noequalalways      " 全てのウィンドウのサイズを同じにしな�
 set hlsearch
 set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
 
-set sh=/bin/zsh 
 set path=$PWD/**
 
 
@@ -434,6 +433,8 @@ elseif has('unix')
 
   let ostype = system("uname")
 
+  set sh=/bin/zsh 
+
   " PuTTY mouse setting
   set mouse=a
   set ttymouse=xterm2
@@ -455,7 +456,7 @@ elseif has('unix')
   " noremap  g/ :<C-u>Migemo<CR>
 
 
-  " ---- neobundle ---- {{{
+  " ---- Neobundle ---- {{{
   if has('vim_starting')
   if &compatible
    set nocompatible               " Be iMproved
@@ -526,7 +527,7 @@ elseif has('unix')
   " If there are uninstalled bundles found on startup,
   " this will conveniently prompt you to install them.
   NeoBundleCheck
-  " /---- neobundle ---- }}}
+  " /---- Neobundle ---- }}}
 
 
   colorscheme darkblue
