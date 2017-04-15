@@ -37,6 +37,14 @@ map <F7> :set wrap!<CR>
 nmap ,e :Sexplore<CR>
 nmap ,v :tabnew ~/.vimrc<CR>
 nmap ,s :source ~/.vimrc<CR>
+nmap ,g :new vendor\bundle\ruby\2.4.0\gems\gentelella-rails-0.1.3<CR>
+
+" qq で現在のファイルを実行
+" silent! nmap <unique>qq <Plug>(quickrun)
+let g:quickrun_config = {}
+let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
+" let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
+let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c %s']}
 
 
 " -- ChangeLog \c \o
@@ -61,6 +69,8 @@ if v:version >= 704
   " noremap <C-Z> :Unite file_mru<CR>
 endif
 
+" html tag piece jump
+source $VIMRUNTIME/macros/matchit.vim
 
 "command! Ydate execute "normal! i".strftime("%y/%m/%d ")
 ab YDATE =strftime("%Y/%m/%d")<CR>
@@ -173,8 +183,6 @@ if has("gui_win32")
   set guioptions=gmrLtb
   set nobk
   set grepprg=findstr\ /n\ /is
-  " set noundofile
-  set undodir=$VIM/undo
   set scrolloff=5        " カーソルの上または下に表示する最小限の行数
   set ts=2
   set sw=2
@@ -184,13 +192,27 @@ if has("gui_win32")
   set path+=.\**
   set tags+=C:\RailsInstaller\Ruby2.1.0\lib\ruby\gems\2.1.0\gems/tags
 
+  " Not working win network drive
+  set noundofile
+  " set undodir=$VIM/undo
+
   " -- vim-ref
   " let g:ref_refe_cmd = $VIM.'/chrome'
   " let g:ref_phpmanual_cmd='lynx -dump %s -cfg="C:/Program Files (x86)/Lynx for Win32/lynx.cfg"'
   let g:ref_phpmanual_cmd = $VIM.'/lynx/lynx.exe -dump %s -cfg=/vim/lynx/lynx.cfg'
   let g:ref_phpmanual_path = $VIM.'/bundle/vim-ref/php-chunked-xhtml'
 
-  " -- emmet
+	" -- syntastic
+	" set statusline+=%#warningmsg#
+	" set statusline+=%{SyntasticStatuslineFlag()}
+	" set statusline+=%*
+  "
+	" let g:syntastic_always_populate_loc_list = 1
+	" let g:syntastic_auto_loc_list = 1
+	" let g:syntastic_check_on_open = 1
+	" let g:syntastic_check_on_wq = 0
+
+  " -- emmet <C-Y>,
   " let g:user_emmet_settings = { 'variables': { 'lang' : 'ja' } } 
   let g:user_emmet_settings = { 'indentation' : '  ' }
   "let g:user_emmet_leader_key='<c-t>'
@@ -294,6 +316,7 @@ if has("gui_win32")
   NeoBundleFetch 'vim-scripts/Syntastic'
   NeoBundleFetch 'tpope/vim-rails'          " Rails向けのコマンドを提供する
   NeoBundleFetch 'tpope/vim-endwise'
+  NeoBundleFetch "kchmck/vim-coffee-script"
   NeoBundleFetch "slim-template/vim-slim"
   NeoBundleFetch "Chiel92/vim-autoformat"   " pythonは32bit'python-2.7.10.msi'を入れたら動いた
   NeoBundleFetch 'scrooloose/nerdtree'
@@ -308,6 +331,12 @@ if has("gui_win32")
     " <F6> Stop/close
     " <F7> Detach
     " <F9> Run to cursor
+  NeoBundleFetch "thinca/vim-quickrun"
+  NeoBundleFetch "tpope/vim-abolish"        " camelcase <-> snakecase
+  " crs	"SnakeCase" → "snake_case"
+  " crm	"mixed_case" → "MixedCase"
+  " crc	"camel_case" → "camelCase"
+  " cru	"upper_case" → "UPPER_CASE"
 
 	let g:vdebug_force_ascii = 1
 
