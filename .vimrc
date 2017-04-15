@@ -143,7 +143,7 @@ endfunction
 nmap ,e :Sexplore<CR>
 
 
-" -- syntastic
+" -- syntastic - :Errors
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
