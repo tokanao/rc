@@ -32,5 +32,3 @@ fi
 if [ -d "/Users/toka/database/data" ] ; then
   export PGDATA=/Users/toka/database/data
 fi
-
-xmodmap .Xmodmap
