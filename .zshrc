@@ -164,6 +164,9 @@ bindkey "^N" history-beginning-search-forward-end
 # getconf ARG_MAX
 zmodload zsh/files
 
+# CapsLockをCtrlに変更
+setxkbmap -option ctrl:nocaps
+
 
 
 #vim:ts=4:sw=4:et

@@ -16,8 +16,5 @@ autoload zargs
 # 補完でカラーを使用する
 autoload -U colors; colors
 
-# CapsLockをCtrlに変更
-setxkbmap -option ctrl:nocaps
-
 
 path=(/usr/local/Cellar/postgresql-9.2/9.2.18/bin(N-/) $path)
