@@ -101,14 +101,27 @@ autocmd FileType ruby ab deprecated # HACK: deprecated.
 autocmd FileType ruby ab bind binding.pry
 
 	
-command! Backup call Backup()
-function! Backup()
-  let sfile = expand("%:p")
-  let sfile = sfile . "~"
+command! -nargs=? Backup call Backup(<args>)
+function! Backup(...)
+  let cfile = expand("%:p")
+  let sfile = cfile . "~"
   while filereadable(sfile)
     let sfile = sfile . "~"
   endwhile
-  execute "write ".sfile
+
+  if a:0 < 1
+    execute "write ".sfile
+  else
+    if a:1 == "pop"
+      let sfile = substitute(sfile, "\\~", "", "")
+
+      echo sfile . " -> ". cfile
+      call rename(sfile, cfile)
+      edit 
+    else
+      echo "use param 'pop' only."
+    endif
+  endif
 endfunc
 
 command! Tempfile call Tempfile()
@@ -439,7 +452,9 @@ elseif has('unix')
 
   " qq で現在のファイルを実行
   " silent! nmap <unique>qq <Plug>(quickrun)
-  let g:quickrun_config = {}
+  " let g:quickrun_config = {}
+  let g:quickrun_config={'*': {'split': ''}}
+  " set splitbelow
   let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
   let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c %s']}
 
@@ -475,8 +490,8 @@ elseif has('unix')
   NeoBundleFetch "JarrodCTaylor/vim-js2coffee"
   NeoBundleFetch 'jphustman/Align.vim'
   NeoBundleFetch 'scrooloose/syntastic'
-  " NeoBundle 'ngmy/vim-rubocop'
   NeoBundleFetch 'ngmy/vim-rubocop'
+  NeoBundleFetch "Chiel92/vim-autoformat"
   NeoBundleFetch 'vim-scripts/SQLUtilities'
 
   NeoBundle 'mattn/webapi-vim'
