@@ -12,9 +12,11 @@ set nowrapscan
 set noequalalways      " 全てのウィンドウのサイズを同じにしない
 set hlsearch
 set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
+" set statusline+=%{&fenc}\ %{&ff}
 
 set sh=/bin/zsh 
 set path=$PWD/**
+set path+=/usr/local/rbenv/shims/rsense
 
 
 "行が折り返されている場合に対応
@@ -47,7 +49,7 @@ let g:changelog_username = "Naoya Tokashiki <ggtoka@gmail.com>"
 
 
 " -- unite / no support. under vim 7.2
-if v:version >= 704
+if v:version >= 704   " {{{
   " 入力モードで開始する
   " let g:unite_enable_start_insert=1
 
@@ -59,7 +61,7 @@ if v:version >= 704
 
   " 最近使ったファイルの一覧
   " noremap <C-Z> :Unite file_mru<CR>
-endif
+endif   " }}}
 
 
 "command! Ydate execute "normal! i".strftime("%y/%m/%d ")
@@ -125,13 +127,13 @@ function! Backup(...)
 endfunc
 
 command! Tempfile call Tempfile()
-function! Tempfile()
+function! Tempfile()    " {{{
   let tmpfile = tempname()
   execute "write! " . tmpfile
-endfunc
+endfunc   " }}}
 
 command! Reautoassignkey call Reautoassignkey()
-function! Reautoassignkey()
+function! Reautoassignkey()   " {{{
   if &diff 
     echo "diff mode"
     map <F3> ]c
@@ -141,7 +143,7 @@ function! Reautoassignkey()
     map <F3> :cn<CR>
     map <F4> :cp<CR>
   endif
-endfunction
+endfunction   " }}}
 
 "nmap ,e :NERDTreeToggle<CR>
 nmap ,e :Sexplore<CR>
@@ -156,9 +158,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-"
-" " Required:
-" " gem install rubocop
+
+" Required:
+" gem install rubocop
 let g:syntastic_ruby_checkers=['rubocop', 'mri']
 
 " au FileType ruby if exists('b:rails_root') |
@@ -321,6 +323,26 @@ if has("gui_win32")
     " <F6> Stop/close
     " <F7> Detach
     " <F9> Run to cursor
+  " -- code complete
+  NeoBundle 'Shougo/neocomplete.vim'
+  NeoBundle 'marcus/rsense'
+  NeoBundle 'supermomonga/neocomplete-rsense.vim'
+  let g:neocomplcache#sources#rsense#home_directory = '/usr/local/rbenv/shims/rsense'
+
+
+  " NeoBundle 'NigoroJr/rsense'
+  " NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', {
+  "       \ 'autoload' : { 'insert' : 1, 'filetype' : 'ruby', } }
+  "
+  " " 補完の設定
+  " if !exists('g:neocomplete#force_omni_input_patterns')
+  "   let g:neocomplete#force_omni_input_patterns = {}
+  " endif
+  " let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
+  "
+  " let g:rsenseUseOmniFunc = 1
+  let g:rsenseUseOmniFunc = 1
+
 
 	let g:vdebug_force_ascii = 1
 
@@ -457,6 +479,12 @@ elseif has('unix')
   " set splitbelow
   let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
   let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c %s']}
+  let g:quickrun_config = {
+        \   "_" : {
+        \       "outputter/buffer/split" : ":botright",
+        \       "outputter/buffer/close_on_empty" : 1
+        \   },
+        \}
 
   call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -519,7 +547,7 @@ elseif has('unix')
 
   " Stamp factory ソース切り替え(本番 <-> テスト環境)
   command! Toggle call Toggle()
-  function! Toggle()
+  function! Toggle()  " {{{
     let fpath = expand("%:p")
 
     if match(fpath, "/html/") != -1
@@ -536,10 +564,10 @@ elseif has('unix')
     " echo fpath
     let @@ = fpath
     execute "new " . fpath
-  endfunc
+  endfunc   " }}}
 
   command! DSplit call DSplit()
-  function! DSplit()
+  function! DSplit()  " {{{
     let fpath = expand("%:p")
 
     if match(fpath, "/html/") != -1
@@ -554,7 +582,7 @@ elseif has('unix')
     endif
 
     execute "diffsplit " . fpath
-  endfunc
+  endfunc   " }}}
 
   if has('mac')
     set backupdir=/tmp
@@ -577,6 +605,7 @@ elseif has('unix')
     " map <F9> :!open . -a Finder
     map <F8> :!open =expand("%:p:h")<CR> -a iTerm<CR><CR>
     map <F9> :!open =expand("%:p:h")<CR> -a Finder<CR><CR>
+
     map r :!open -a MacVim -n =expand("%:p")<CR>
     map g :gr  app/**/*rb<CR>
     map G :tabnew +gr\ \ app/**/*rb
@@ -586,6 +615,7 @@ elseif has('unix')
 
     command! Syon     new ~/mynote/syon.changelog
     command! Snippet  new ~/mynote/snippet.txt
+
   endif
 endif
 

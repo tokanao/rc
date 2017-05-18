@@ -177,3 +177,4 @@ zmodload zsh/files
 
 
 #vim:ts=4:sw=4:et
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
