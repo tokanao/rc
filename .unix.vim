@@ -4,10 +4,20 @@ let ostype = system("uname")
 set mouse=a
 set ttymouse=xterm2
 set grepprg=grep\ -inr\ $*\ /dev/null
+"set paste    " PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
 
+" -- jslint.vim
+" filetype plugin on
+" let $JS_CMD='node'
 
-" PuTTY 右クリックペースト時、自動的にコメントアウトされるのを防ぐ
-"set paste
+" javascript-libraries-syntax'
+let g:used_javascript_libs = 'jquery,angularjs'
+au BufReadPre *.js let b:javascript_lib_use_jquery = 1
+au BufReadPre *.js let b:javascript_lib_use_underscore = 0
+au BufReadPre *.js let b:javascript_lib_use_backbone = 0
+au BufReadPre *.js let b:javascript_lib_use_prelude = 0
+au BufReadPre *.js let b:javascript_lib_use_angularjs = 1
+
 
 " Required: vim-migemo が使えれば不要
 "   % git clone https://github.com/koron/cmigemo
@@ -36,12 +46,6 @@ let g:quickrun_config={'*': {'split': ''}}
 " set splitbelow
 let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
 let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c %s']}
-let g:quickrun_config = {
-      \   "_" : {
-      \       "outputter/buffer/split" : ":botright",
-      \       "outputter/buffer/close_on_empty" : 1
-      \   },
-      \}
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -64,6 +68,7 @@ NeoBundleFetch 'scrooloose/syntastic'
 NeoBundleFetch 'ngmy/vim-rubocop'
 NeoBundleFetch "Chiel92/vim-autoformat"
 NeoBundleFetch 'vim-scripts/SQLUtilities'
+NeoBundleFetch 'othree/javascript-libraries-syntax.vim'
 NeoBundleFetch "tpope/vim-abolish"        " camelcase <-> snakecase
   " crs	"SnakeCase" → "snake_case"
   " crm	"mixed_case" → "MixedCase"

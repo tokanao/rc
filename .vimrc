@@ -46,6 +46,9 @@ au BufNewFile,BufRead *.changelog setf changelog
 let g:changelog_timeformat = "%Y-%m-%d"
 let g:changelog_username = "Naoya Tokashiki <ggtoka@gmail.com>"
 
+" Rabl
+au BufRead,BufNewFile *.rabl setf ruby
+
 
 ab YDATE =strftime("%Y/%m/%d")<CR>
 
