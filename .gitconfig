@@ -5,3 +5,6 @@
 	br = branch
 	sb = show-branch
 	st = stash
+[user]
+  name = tokanao
+  email = ggtoka@gmail.com

@@ -35,6 +35,7 @@ alias ff='find -iname'
 # alias beste='nice -n 19 ionice -c 3'
 # alias gits='git status|head -n 20'
 alias gits='git status -s'
+alias gitf='git diff'
 #alias lsd='ls -l --color=auto html|grep ^d'
 alias rm='rm -i'
 alias mv='mv -i'
@@ -51,6 +52,8 @@ case ${OSTYPE} in
   linux*)
     alias ls='ls --color=auto'
     alias ll='ls -lt --color=auto --block-size=k'
+    # CapsLockをCtrlに変更
+    setxkbmap -option ctrl:nocaps
     ;;
 esac
 
@@ -147,6 +150,12 @@ function cdup() {
 }
 zle -N cdup
 bindkey '^j' cdup
+function cdold() {
+  cd -
+  zle accept-line
+}
+zle -N cdold
+bindkey '^O' cdold
 
 #bindkey -L 	show shortcut keys. written 'man zshzle'
 
@@ -166,4 +175,6 @@ zmodload zsh/files
 
 
 
+
 #vim:ts=4:sw=4:et
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
