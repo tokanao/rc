@@ -14,6 +14,8 @@ set hlsearch
 set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
 
 set path=$PWD/**
+" set spell
+" set spelllang=en,cjk
 
 
 "行が折り返されている場合に対応
@@ -59,7 +61,7 @@ if v:version >= 704
   " let g:unite_enable_start_insert=1
 
   " バッファ一覧 - vim 7.2 では利用できない
-  noremap <C-e> :Unite bookmark<CR>
+  noremap <C-e> :Unite buffer<CR>
 
   " ファイル一覧
   " noremap <C-N> :Unite -buffer-name=file file<CR>
@@ -108,6 +110,7 @@ autocmd FileType ruby ab perform start_time = Time.now; p "処理概要 #{Time.n
 autocmd FileType ruby ab logd logger.debug("DEBUG: params => #{params}")
 autocmd FileType ruby ab deprecated # HACK: deprecated.
 autocmd FileType ruby ab bind binding.pry
+autocmd FileType ruby ab deb debugger
 
 	
 command! Backup call Backup()
@@ -225,6 +228,8 @@ if has("gui_win32")
   map l :set lines=60<CR>
   map h :set columns=160<CR>
 
+  map G :tabnew +gr\ \ app/**
+
   " VimTip 448: Yank (copy) decimal numbers from hex numbers.
   map \y g*<esc>:let @*=@/ + 0<enter> 
 
@@ -233,7 +238,8 @@ if has("gui_win32")
 
   map <F5> :new ../api/%<CR>
   nnoremap <F6> :let @* = '%'<CR>
-  map <F8> :!start cmd<CR>
+  " map <F8> :!start cmd<CR>
+  map <F8> :set statusline+=%{&fenc}\ %{&ff}<CR>
   map <F9> :call OpenExplorer("")<CR>
 
   " Move Window
@@ -336,6 +342,11 @@ if has("gui_win32")
   " crm	"mixed_case" → "MixedCase"
   " crc	"camel_case" → "camelCase"
   " cru	"upper_case" → "UPPER_CASE"
+  NeoBundleFetch 'mattn/gist-vim'           " not work, so not installed curl
+    let g:github_user = 'tokanao'
+    let g:github_token = 'd0408c10d37cf8ca6d797e4f25446b5260e7fd30'
+    let g:gist_detect_filetype = 1
+    " let g:gist_curl_options = "-k"
 
 	let g:vdebug_force_ascii = 1
 
@@ -513,8 +524,8 @@ elseif has('unix')
   NeoBundle 'mattn/gist-vim'
     let g:github_user = 'tokanao'
     let g:github_token = 'd0408c10d37cf8ca6d797e4f25446b5260e7fd30'
-    " let g:gist_curl_options = "-k"
     let g:gist_detect_filetype = 1
+    " let g:gist_curl_options = "-k"
 
   " My Bundles here:
   " Refer to |:NeoBundle-examples|.
@@ -645,6 +656,12 @@ endif
 
 " 標準出力を編集
 " mdfind -onlyin ./ Schemafile | vi -
+
+" 文字化けしたファイルを開き直す
+" :e ++enc=utf8
+
+" デフォルトショートカットキー
+" :h index.txt
 
 
 
