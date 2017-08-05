@@ -36,3 +36,9 @@
 
 " 標準出力を編集
 " mdfind -onlyin ./ Schemafile | vi -
+
+" 文字化けしたファイルを開き直す
+" :e ++enc=utf8
+
+" デフォルトショートカットキー
+" :h index.txt

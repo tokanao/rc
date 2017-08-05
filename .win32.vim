@@ -10,12 +10,15 @@ set nocompatible
 set guioptions=gmrLtb
 set nobk
 set grepprg=findstr\ /n\ /is
-set undodir=$VIM/undo
-set scrolloff=5     " カーソルの上または下に表示する最小限の行数
-set tags+=C:\RailsInstaller\Ruby2.1.0\lib\ruby\gems\2.1.0\gems/tags
-" set noundofile
-" set verbose=9     " autocmdデバッグ用
+set scrolloff=5        " カーソルの上または下に表示する最小限の行数
+" set verbose=9           " autocmdデバッグ用
 
+set path+=.\**
+set tags+=C:\RailsInstaller\Ruby2.1.0\lib\ruby\gems\2.1.0\gems/tags
+
+" Not working win network drive
+set noundofile
+" set undodir=$VIM/undo
 
 " -- vim-ref
 " let g:ref_refe_cmd = $VIM.'/chrome'
@@ -23,7 +26,18 @@ set tags+=C:\RailsInstaller\Ruby2.1.0\lib\ruby\gems\2.1.0\gems/tags
 let g:ref_phpmanual_cmd = $VIM.'/lynx/lynx.exe -dump %s -cfg=/vim/lynx/lynx.cfg'
 let g:ref_phpmanual_path = $VIM.'/bundle/vim-ref/php-chunked-xhtml'
 
-" -- emmet
+" -- syntastic :Errors
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_ruby_checkers=['rubocop', 'mri']
+
+" -- emmet <C-Y>,
 " let g:user_emmet_settings = { 'variables': { 'lang' : 'ja' } } 
 let g:user_emmet_settings = { 'indentation' : '  ' }
 "let g:user_emmet_leader_key='<c-t>'
@@ -37,6 +51,8 @@ map m :set lines=50<CR>:set columns=120<CR>
 map l :set lines=60<CR>
 map h :set columns=160<CR>
 
+map G :tabnew +gr\ \ app/**
+
 " VimTip 448: Yank (copy) decimal numbers from hex numbers.
 map \y g*<esc>:let @*=@/ + 0<enter> 
 
@@ -45,7 +61,8 @@ nmap ,r :pedit $VIM/vimrc_local_toka.vim<CR>
 
 map <F5> :new ../api/%<CR>
 nnoremap <F6> :let @* = '%'<CR>
-map <F8> :!start cmd<CR>
+" map <F8> :!start cmd<CR>
+map <F8> :set statusline+=%{&fenc}\ %{&ff}<CR>
 map <F9> :call OpenExplorer("")<CR>
 
 " Move Window
@@ -108,28 +125,29 @@ endif
 "   git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 call neobundle#begin(expand('$VIM/bundle/'))
 
-NeoBundleFetch "Chiel92/vim-autoformat"   " pythonは32bit'python-2.7.10.msi'を入れたら動いた
-NeoBundleFetch "slim-template/vim-slim"
+" Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundleFetch 'Shougo/unite.vim'
-NeoBundleFetch 'Townk/vim-autoclose'
-NeoBundleFetch 'alvan/vim-closetag'
-NeoBundleFetch 'gmarik/Vundle.vim'
-NeoBundleFetch 'hail2u/vim-css3-syntax'
-NeoBundleFetch 'jphustman/Align.vim'
 NeoBundleFetch 'mattn/emmet-vim'          " zen-coding
+NeoBundleFetch 'tyru/open-browser.vim'
+NeoBundleFetch 'Townk/vim-autoclose'
+NeoBundleFetch 'jphustman/Align.vim'
+NeoBundleFetch 'vim-scripts/surround.vim'
 NeoBundleFetch 'othree/html5.vim'
-NeoBundleFetch 'scrooloose/nerdtree'
+NeoBundleFetch 'hail2u/vim-css3-syntax'
 NeoBundleFetch 'skammer/vim-css-color'
 NeoBundleFetch 'thinca/vim-ref'
-NeoBundleFetch 'tpope/vim-endwise'
-NeoBundleFetch 'tpope/vim-fugitive'       " git
-NeoBundleFetch 'tpope/vim-rails'          " Rails向けのコマンドを提供する
-NeoBundleFetch 'tyru/open-browser.vim'
-NeoBundleFetch 'vim-scripts/Syntastic'
-NeoBundleFetch 'vim-scripts/surround.vim'
 NeoBundleFetch 'vim-scripts/taglist.vim'
-
+NeoBundleFetch 'Shougo/unite.vim'
+NeoBundleFetch 'alvan/vim-closetag'
+NeoBundleFetch 'vim-scripts/Syntastic'
+NeoBundleFetch 'tpope/vim-rails'          " Rails向けのコマンドを提供する
+NeoBundleFetch 'tpope/vim-endwise'
+NeoBundleFetch "kchmck/vim-coffee-script"
+NeoBundleFetch "slim-template/vim-slim"
+NeoBundleFetch "Chiel92/vim-autoformat"   " pythonは32bit'python-2.7.10.msi'を入れたら動いた
+NeoBundleFetch 'scrooloose/nerdtree'
+NeoBundleFetch 'tpope/vim-fugitive'       " git
+NeoBundleFetch 'gmarik/Vundle.vim'
 " need setting /xampp/php/php.ini
 NeoBundleFetch 'joonty/vdebug'            " PHP xdebug - $VIM から python.dll 削除で動いた 
   " <F2> Step over
@@ -139,15 +157,23 @@ NeoBundleFetch 'joonty/vdebug'            " PHP xdebug - $VIM から python.dll 
   " <F6> Stop/close
   " <F7> Detach
   " <F9> Run to cursor
+NeoBundleFetch "thinca/vim-quickrun"
+NeoBundleFetch "tpope/vim-abolish"        " camelcase <-> snakecase
+" crs	"SnakeCase" → "snake_case"
+" crm	"mixed_case" → "MixedCase"
+" crc	"camel_case" → "camelCase"
+" cru	"upper_case" → "UPPER_CASE"
+NeoBundleFetch 'mattn/gist-vim'           " not work, so not installed curl
+  let g:github_user = 'tokanao'
+  let g:github_token = 'd0408c10d37cf8ca6d797e4f25446b5260e7fd30'
+  let g:gist_detect_filetype = 1
+  " let g:gist_curl_options = "-k"
 
-" -- code complete
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'marcus/rsense'
-NeoBundle 'supermomonga/neocomplete-rsense.vim'
-let g:neocomplcache#sources#rsense#home_directory = '/usr/local/rbenv/shims/rsense'
-
-let g:rsenseUseOmniFunc = 1
 let g:vdebug_force_ascii = 1
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
 
 call neobundle#end()
 
