@@ -62,7 +62,7 @@ nmap ,r :pedit $VIM/vimrc_local_toka.vim<CR>
 map <F5> :new ../api/%<CR>
 nnoremap <F6> :let @* = '%'<CR>
 " map <F8> :!start cmd<CR>
-map <F8> :set statusline+=%{&fenc}\ %{&ff}<CR>
+map <F8> :call ToggleStatusLine()<CR>
 map <F9> :call OpenExplorer("")<CR>
 
 " Move Window
@@ -109,6 +109,14 @@ function! EccubeToggleByParentToEx()
   endif
 
   execute "new " . fpath
+endfunction
+
+function! ToggleStatusLine()
+  if &stl == ""
+    set statusline=%{&fenc}\ %{&ff}
+  else
+    set statusline=
+  end
 endfunction
 
 au FileType smarty set ts=4
