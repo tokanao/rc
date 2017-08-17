@@ -63,7 +63,7 @@ ab YDATE =strftime("%Y/%m/%d")<CR>
 au FileType php ab errlog error_log(print_r($foo));
 au FileType php set noet
 au FileType html set et
-au FileType ruby ab perform start_time = Time.now; p "処理概要 #{Time.now - start_time}s"
+" au FileType ruby ab perform start_time = Time.now; p "処理概要 #{Time.now - start_time}s"
 au FileType ruby ab logd logger.debug("DEBUG: params => #{params}")
 au FileType ruby ab deprecated # HACK: deprecated.
 au FileType ruby ab bind binding.pry
