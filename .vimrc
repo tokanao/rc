@@ -2,6 +2,7 @@
 syntax on
 
 set ff=unix
+set ffs=unix,dos
 set fenc=utf8
 
 set ic
@@ -12,7 +13,9 @@ set nowrapscan
 set noequalalways      " 全てのウィンドウのサイズを同じにしない
 set hlsearch
 set clipboard+=unnamed " デフォルトレジスタ クリップボードレジスタ使用
+set shellslash
 " set statusline+=%{&fenc}\ %{&ff}
+set statusline=%f%m%=%l,%c\ %{'['.(&fenc!=''?&fenc:&enc).']\ ['.&fileformat.']'}
 
 set path=$PWD/**
 set path+=.\**

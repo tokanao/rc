@@ -59,8 +59,9 @@ map \y g*<esc>:let @*=@/ + 0<enter>
 " nmap ,v :tab args $VIM/vimrc_local.vim $VIM/vimrc<CR>
 nmap ,r :pedit $VIM/vimrc_local_toka.vim<CR>
 
-map <F5> :new ../api/%<CR>
-nnoremap <F6> :let @* = '%'<CR>
+" map <F5> :new ../api/%<CR>
+map <F5> :set ff=unix<CR>:set fenc=utf8<CR>
+nnoremap <F6> :let @* = expand("%:p")<CR>
 " map <F8> :!start cmd<CR>
 map <F8> :call ToggleStatusLine()<CR>
 map <F9> :call OpenExplorer("")<CR>
@@ -78,6 +79,7 @@ nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 
 
 command! Memo       new    $VIM/mynote/memo.changelog
+command! Readme     tabnew ./readme.changelog
 command! -nargs=0 LcdCurrent lcd %:p:h
 command! English    new    C:\Users\nao\Desktop\personal\echat.txt
 command! EcLink call OpenExplorer("c:\\xampp\\htdocs\\kisekae\\html\\user_data\\packages")
