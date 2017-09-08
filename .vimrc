@@ -4,6 +4,7 @@ syntax on
 set ff=unix
 set ffs=unix,dos
 set fenc=utf8
+set fencs=utf-8,guess,ucs-bom,ucs-2le,ucs-2,iso-2022-jp-3,euc-jisx0213,euc-jp
 
 set ic
 set ts=2
@@ -63,6 +64,7 @@ let g:changelog_username = "Naoya Tokashiki <ggtoka@gmail.com>"
 
 au BufRead,BufNewFile *.rabl setf ruby
 au BufRead,BufNewFile *.schema setf ruby
+au BufRead,BufNewFile *.axlsx setf ruby
 
 ab YDATE =strftime("%Y/%m/%d")<CR>
 
