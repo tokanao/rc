@@ -32,8 +32,8 @@ noremap n nzz
 
 nmap <Space> 
 nmap <C-l> :noh<CR>
-nmap <C-p> <C-w>2-<CR>
-nmap <C-n> <C-w>2+<CR>
+nnoremap <C-p> <C-w>2-<CR>
+nnoremap <C-n> <C-w>2+<CR>
 
 map <F2> :let @" = expand("%:p")<CR>
 map <F3> :cn<CR>
