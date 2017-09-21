@@ -49,6 +49,9 @@ nmap ,v :tabnew ~/.vimrc<CR>
 nmap ,s :source ~/.vimrc<CR>
 nmap ,g :new vendor\bundle\ruby\2.4.0\gems\gentelella-rails-0.1.3<CR>
 
+cnoremap <c-n>  <down>
+cnoremap <c-p>  <up>
+
 " qq で現在のファイルを実行
 " silent! nmap <unique>qq <Plug>(quickrun)
 let g:quickrun_config = {}
@@ -76,6 +79,11 @@ au FileType ruby ab logd logger.debug("DEBUG: params => #{params}")
 au FileType ruby ab deprecated # HACK: deprecated.
 au FileType ruby ab bind binding.pry
 au FileType ruby ab deb debugger
+
+autocmd WinEnter    * set cursorline
+autocmd WinLeave    * set nocursorline
+autocmd InsertEnter * set nocursorline
+autocmd InsertLeave * set cursorline
 
 " html tag piece jump
 source $VIMRUNTIME/macros/matchit.vim
