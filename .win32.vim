@@ -62,8 +62,8 @@ nmap ,r :pedit $VIM/vimrc_local_toka.vim<CR>
 " map <F5> :new ../api/%<CR>
 map <F5> :set ff=unix<CR>:set fenc=utf8<CR>
 nnoremap <F6> :let @* = expand("%:p")<CR>
-" map <F8> :!start cmd<CR>
-map <F8> :call ToggleStatusLine()<CR>
+map <F8> :!start cmd<CR>
+" map <F8> :call ToggleStatusLine()<CR>
 map <F9> :call OpenExplorer("")<CR>
 
 " Move Window

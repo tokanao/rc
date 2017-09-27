@@ -77,8 +77,8 @@ au FileType html set et
 " au FileType ruby ab perform start_time = Time.now; p "処理概要 #{Time.now - start_time}s"
 au FileType ruby ab logd logger.debug("DEBUG: params => #{params}")
 au FileType ruby ab deprecated # HACK: deprecated.
-au FileType ruby ab bind binding.pry
 au FileType ruby ab deb debugger
+au FileType ruby ab pack_tag = javascript_pack_tag 'xxx_vue'<CR>= stylesheet_pack_tag 'xxx_vue'
 
 autocmd WinEnter    * set cursorline
 autocmd WinLeave    * set nocursorline
