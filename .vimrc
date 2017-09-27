@@ -53,7 +53,7 @@ cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 
 " qq で現在のファイルを実行
-" silent! nmap <unique>qq <Plug>(quickrun)
+silent! nmap <unique>qq <Plug>(quickrun)
 let g:quickrun_config = {}
 let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
 " let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}

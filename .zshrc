@@ -43,6 +43,7 @@ alias cp='cp -i'
 alias psg='ps aux|grep'
 alias hgr='history 0|grep'
 alias be='bundle exec'
+alias tplcp='~/bin/tcp.rb'
 case ${OSTYPE} in
   darwin*)
     alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim "$@"'

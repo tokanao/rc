@@ -19,11 +19,12 @@ fi
 # rbenv exec gem install bundler
 # rbenv rehash
 # rbenv exec gem which bundler
-if [ -d "/usr/local/rbenv/bin" ] ; then
-  export RBENV_ROOT="/usr/local/rbenv"
-  export PATH="/usr/local/rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
+# if [ -d "/usr/local/rbenv/bin" ] ; then
+#   export RBENV_ROOT="/usr/local/rbenv"
+#   export PATH="/usr/local/rbenv/bin:$PATH"
+#   eval "$(rbenv init -)"
+# fi
+eval "$(rbenv init -)"
 
 if [ -d "/usr/local/lib/node_modules/npm/bin" ] ; then
   export PATH=/usr/local/lib/node_modules/npm/bin:$PATH
