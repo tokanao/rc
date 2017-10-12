@@ -69,6 +69,8 @@ NeoBundleFetch 'ngmy/vim-rubocop'
 NeoBundleFetch "Chiel92/vim-autoformat"
 NeoBundleFetch 'vim-scripts/SQLUtilities'
 NeoBundleFetch 'othree/javascript-libraries-syntax.vim'
+NeoBundleFetch "ctrlpvim/ctrlp.vim"
+  let g:ctrlp_map = '<c-s>'
 NeoBundleFetch "tpope/vim-abolish"        " camelcase <-> snakecase
   " crs	"SnakeCase" → "snake_case"
   " crm	"mixed_case" → "MixedCase"
@@ -123,6 +125,7 @@ if has('mac')
   map <F9> :!open =expand("%:p:h")<CR> -a Finder<CR><CR>
 
   map r :!open -a MacVim -n =expand("%:p")<CR>
+  " map r :!open -a /Applications/MacVim.app/Contents/MacOS/mvim +"set readonly" =expand("%:p")<CR>
   map g :gr  app/**/*rb<CR>
   map G :tabnew +gr\ \ app/**/*rb
 

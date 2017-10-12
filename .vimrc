@@ -34,6 +34,7 @@ nmap <Space> 
 nmap <C-l> :noh<CR>
 nnoremap <C-p> <C-w>2-<CR>
 nnoremap <C-n> <C-w>2+<CR>
+" noremap <C-w><C-w> <C-w>4+<CR>
 
 map <F2> :let @" = expand("%:p")<CR>
 map <F3> :cn<CR>
@@ -49,6 +50,7 @@ nmap ,v :tabnew ~/.vimrc<CR>
 nmap ,s :source ~/.vimrc<CR>
 nmap ,g :new vendor\bundle\ruby\2.4.0\gems\gentelella-rails-0.1.3<CR>
 
+" コマンドで前方一致検索を行う
 cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 
