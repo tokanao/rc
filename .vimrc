@@ -48,6 +48,7 @@ nmap ,b :NERDTreeFromBookmark <C-d>
 
 nmap ,v :tabnew ~/.vimrc<CR>
 nmap ,s :source ~/.vimrc<CR>
+nmap ,t :tabnew ~/.vim/rc/dein.toml<CR>
 nmap ,g :new vendor\bundle\ruby\2.4.0\gems\gentelella-rails-0.1.3<CR>
 
 " コマンドで前方一致検索を行う

@@ -1,0 +1,76 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]] # toml syntax
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'vim-scripts/taglist.vim'
+
+[[plugins]]
+repo = 'tpope/vim-rails'          # Rails向けのコマンドを提供する
+
+[[plugins]]
+repo = 'haya14busa/vim-migemo'
+
+[[plugins]]
+repo = 'chrisbra/SudoEdit.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'       # git
+
+[[plugins]]
+repo = "slim-template/vim-slim"
+
+[[plugins]]
+repo = "thinca/vim-quickrun"
+
+[[plugins]]
+repo = "kchmck/vim-coffee-script"
+
+[[plugins]]
+repo = "JarrodCTaylor/vim-js2coffee"
+
+[[plugins]]
+repo = 'jphustman/Align.vim'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'ngmy/vim-rubocop'
+
+[[plugins]]
+repo = "Chiel92/vim-autoformat"
+
+[[plugins]]
+repo = 'vim-scripts/SQLUtilities'
+
+[[plugins]]
+repo = 'othree/javascript-libraries-syntax.vim'
+
+[[plugins]]
+repo = "ctrlpvim/ctrlp.vim"
+hook_add = '''let g:ctrlp_map = "<C-s>"'''
+
+[[plugins]]
+repo = "tpope/vim-abolish"        # camelcase <-> snakecase
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+if = '''v:version >= 704'''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+if = '''v:version >= 704'''
+
+[[plugins]]
+repo = "davydovanton/vim-html2slim"
+if = '''executable('rubocop')'''

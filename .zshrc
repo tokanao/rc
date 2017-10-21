@@ -10,6 +10,7 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
     /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
 
+#export LANG=C.UTF-8    # locale -a
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
 export PAGER=less
