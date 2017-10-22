@@ -24,7 +24,9 @@ fi
 #   export PATH="/usr/local/rbenv/bin:$PATH"
 #   eval "$(rbenv init -)"
 # fi
-eval "$(rbenv init -)"
+if builtin command -v rbenv > /dev/null; then
+  eval "$(rbenv init -)"
+if
 
 if [ -d "/usr/local/lib/node_modules/npm/bin" ] ; then
   export PATH=/usr/local/lib/node_modules/npm/bin:$PATH
@@ -35,4 +37,8 @@ fi
 
 if [ -d "/Users/toka/database/data" ] ; then
   export PGDATA=/Users/toka/database/data
+fi
+
+if [ -d "~/go" ] ; then
+ 	export GOPATH=~/go
 fi

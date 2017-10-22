@@ -18,3 +18,8 @@ autoload -U colors; colors
 
 
 path=(/usr/local/Cellar/postgresql-9.2/9.2.18/bin(N-/) $path)
+
+
+if [ -s ~/.nvm/nvm.sh ] ; then
+	source ~/.nvm/nvm.sh ;
+fi

@@ -14,6 +14,7 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
 export PAGER=less
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 # reset & emacs mode
 bindkey -d
@@ -55,7 +56,7 @@ case ${OSTYPE} in
     alias ls='ls --color=auto'
     alias ll='ls -lt --color=auto --block-size=k'
     # CapsLockをCtrlに変更
-    setxkbmap -option ctrl:nocaps
+    # setxkbmap -option ctrl:nocaps
     ;;
 esac
 
@@ -177,6 +178,4 @@ zmodload zsh/files
 
 
 
-
 #vim:ts=4:sw=4:et
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
