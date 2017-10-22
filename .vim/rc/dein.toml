@@ -74,3 +74,16 @@ if = '''v:version >= 704'''
 [[plugins]]
 repo = "davydovanton/vim-html2slim"
 if = '''executable('rubocop')'''
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+hook_add = '''
+  au BufRead,BufNewFile *.md set filetype=markdown
+'''
+  # let g:previm_open_cmd = "open -a Firefox"
+
+[[plugins]]
+repo = 'kannokanno/previm'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
