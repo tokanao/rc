@@ -1,10 +1,10 @@
-#!/usr/bin/ruby
+#!/home/toka/.rbenv/shims/ruby
 
-require 'pry'
+#require 'pry'
 
 puts 'input args overwrite file name.' and exit if ARGV.size.zero?
 
-ENV['TCP_SRC_PATH'] = '/home/share/rails5/hwcrawl'
+ENV['TCP_SRC_PATH'] = '/home/toka/rails/sales_mng'
 
 EXCLUDE_PATH = %w[vendor]
 
