@@ -159,7 +159,7 @@ function cdold() {
   zle accept-line
 }
 zle -N cdold
-# bindkey '^O' cdold
+bindkey '^O' cdold
 
 #bindkey -L 	show shortcut keys. written 'man zshzle'
 
@@ -203,20 +203,24 @@ dabbrev-complete () {
 }
 
 zle -C dabbrev-complete menu-complete dabbrev-complete
-bindkey '^o' dabbrev-complete
-bindkey '^o^_' reverse-menu-complete
+# bindkey '^o' dabbrev-complete
+# bindkey '^o^_' reverse-menu-complete
 
 # Required: fzf
 # git clone https://github.com/junegunn/fzf.git ~/.fzf
 # ~/.fzf/install
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# function select-history() {
-#   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
-#   CURSOR=$#BUFFER
-# }
+function select-history() {
+  BUFFER=$(history -n -r 1 | awk '!a[$0]++' |fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  # CURSOR=$#BUFFER
+  zle accept-line
+}
 # zle -N select-history
 # bindkey '^r' select-history
+
+[ -s ~/.nvm/nvm.sh ] && source ~/.nvm/nvm.sh
+[ -d ~/gibo ] && export PATH="$HOME/gibo:$PATH"
 
 
 
