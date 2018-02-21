@@ -27,7 +27,7 @@ alias la='ls -a'
 [ ! -e "/usr/bin/lv" ] && alias lv='less'
 alias h='history 0'
 alias vi='vim'
-alias vizshrc='vi ~/.zprofile ~/.zshenv ~/.zshrc ; source ~/.zshrc'
+alias vizshrc='vi ~/.zshrc ~/.zprofile ~/.zshenv ; source ~/.zshrc'
 alias vivimrc='vi ~/.vimrc'
 alias vinginx='vi /etc/nginx/conf.d'
 alias viblog='vi /mnt/hgfs/railsprj/blog/source/blog/posts/'
@@ -46,6 +46,7 @@ alias psg='ps aux|grep'
 alias hgr='history 0|grep'
 alias be='bundle exec'
 alias tplcp='~/bin/tcp.rb'
+alias tpldiff='~/bin/tpldiff.rb'
 case ${OSTYPE} in
   darwin*)
     alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim "$@"'
@@ -158,7 +159,7 @@ function cdold() {
   zle accept-line
 }
 zle -N cdold
-# bindkey '^O' cdold
+bindkey '^O' cdold
 
 #bindkey -L 	show shortcut keys. written 'man zshzle'
 
@@ -178,6 +179,17 @@ zmodload zsh/files
 
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
+if [ -d "$HOME/.rbenv/bin" ] ; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+# Required:
+# curl -L git.io/nodebrew | perl - setup
+if [ -d "$HOME/.nodebrew/current/bin" ] ; then
+  export PATH="$HOME/.nodebrew/current/bin:$PATH"
+fi
+
 
 # dabbrev
 HARDCOPYFILE=$HOME/tmp/screen-hardcopy
@@ -191,8 +203,25 @@ dabbrev-complete () {
 }
 
 zle -C dabbrev-complete menu-complete dabbrev-complete
-bindkey '^o' dabbrev-complete
-bindkey '^o^_' reverse-menu-complete
+# bindkey '^o' dabbrev-complete
+# bindkey '^o^_' reverse-menu-complete
+
+# Required: fzf
+# git clone https://github.com/junegunn/fzf.git ~/.fzf
+# ~/.fzf/install
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+function select-history() {
+  BUFFER=$(history -n -r 1 | awk '!a[$0]++' |fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  # CURSOR=$#BUFFER
+  zle accept-line
+}
+# zle -N select-history
+# bindkey '^r' select-history
+
+[ -s ~/.nvm/nvm.sh ] && source ~/.nvm/nvm.sh
+[ -d ~/gibo ] && export PATH="$HOME/gibo:$PATH"
+
 
 
 #vim:ts=4:sw=4:et

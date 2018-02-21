@@ -5,10 +5,10 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # Required: mac
 # git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 # git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-if [ -d "$HOME/.rbenv/bin" ] ; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
+# if [ -d "$HOME/.rbenv/bin" ] ; then
+#   export PATH="$HOME/.rbenv/bin:$PATH"
+#   eval "$(rbenv init -)"
+# fi
 
 # Required:
 # git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv
@@ -24,21 +24,21 @@ fi
 #   export PATH="/usr/local/rbenv/bin:$PATH"
 #   eval "$(rbenv init -)"
 # fi
-if builtin command -v rbenv > /dev/null; then
-  eval "$(rbenv init -)"
-if
+# if builtin command -v rbenv > /dev/null; then
+#   eval "$(rbenv init -)"
+# if
 
 if [ -d "/usr/local/lib/node_modules/npm/bin" ] ; then
   export PATH=/usr/local/lib/node_modules/npm/bin:$PATH
 fi
-if [ -d "$HOME/.nodebrew/current/bin" ] ; then
-  export PATH="$HOME/.nodebrew/current/bin:$PATH"
-fi
+# Required:
+# curl -L git.io/nodebrew | perl - setup
+# if [ -d "$HOME/.nodebrew/current/bin" ] ; then
+#   export PATH="$HOME/.nodebrew/current/bin:$PATH"
+# fi
 
 if [ -d "/Users/toka/database/data" ] ; then
   export PGDATA=/Users/toka/database/data
 fi
 
-if [ -d "~/go" ] ; then
- 	export GOPATH=~/go
-fi
+[ -d ~/go ] && export GOPATH=~/go
