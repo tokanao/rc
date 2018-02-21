@@ -30,6 +30,7 @@ au BufReadPre *.js let b:javascript_lib_use_angularjs = 1
 
 
 " ---- dein ---- {{{
+if v:version >= 704
   if &compatible
     set nocompatible
   endif
@@ -82,6 +83,7 @@ au BufReadPre *.js let b:javascript_lib_use_angularjs = 1
   if dein#check_install()
     call dein#install()
   endif
+endif
 " /---- dein ---- }}}
 
 
@@ -92,8 +94,8 @@ if has('mac')
 
   colorscheme morning
 
-  map m :set lines=40<CR>:set columns=100<CR>
-  map l :set lines=60<CR>:set columns=100<CR>
+  map m :set lines=40<CR>:set columns=110<CR>
+  map l :set lines=60<CR>:set columns=110<CR>
   map h :set columns=160<CR>
 
   " Move Window

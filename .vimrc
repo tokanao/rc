@@ -51,12 +51,17 @@ nmap ,s :source ~/.vimrc<CR>
 nmap ,t :tabnew ~/.vim/rc/dein.toml<CR>
 nmap ,g :new vendor\bundle\ruby\2.4.0\gems\gentelella-rails-0.1.3<CR>
 
+nmap fd /debugger<CR>
+nmap fl /logger<CR>
+nmap ft /todo<CR>
+nmap ff /fixme<CR>
+
 " コマンドで前方一致検索を行う
 cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 
 " qq で現在のファイルを実行
-silent! nmap <unique>qq <Plug>(quickrun)
+" silent! nmap <unique>qq <Plug>(quickrun)
 let g:quickrun_config = {}
 let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s']}
 " let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
@@ -101,7 +106,8 @@ source ~/.func.vim
 " let g:syntastic_auto_loc_list = 0
 " let g:syntastic_check_on_open = 0
 " let g:syntastic_check_on_wq = 0
-" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 " let g:syntastic_javascript_checkers = "jshint"
 
 

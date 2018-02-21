@@ -10,7 +10,7 @@
 " ヘルプコマンド関連
 "help user-manual
 "help howto
-"help index
+"help index         key bind list
 "viusage
 "exusage
 

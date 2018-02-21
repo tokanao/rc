@@ -87,3 +87,6 @@ repo = 'kannokanno/previm'
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'lambdalisue/vim-gista'
