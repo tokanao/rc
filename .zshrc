@@ -52,7 +52,6 @@ case ${OSTYPE} in
     alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim "$@"'
     alias ls='ls -G'
     alias ll='ls -lt -G'
-    export HOMEBREW_GITHUB_API_TOKEN="832317cbf968a6837882f95419a300a493629a5d"
     ;;
   linux*)
     alias ls='ls --color=auto'
