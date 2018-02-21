@@ -33,7 +33,7 @@ alias vinginx='vi /etc/nginx/conf.d'
 alias viblog='vi /mnt/hgfs/railsprj/blog/source/blog/posts/'
 #alias tree='tree --charset=x'
 alias rc='rclone'
-alias ff='find -iname'
+alias ff='find . -iname'
 # alias beste='nice -n 19 ionice -c 3'
 # alias gits='git status|head -n 20'
 alias gits='git status -s'
@@ -52,6 +52,7 @@ case ${OSTYPE} in
     alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim "$@"'
     alias ls='ls -G'
     alias ll='ls -lt -G'
+    export HOMEBREW_GITHUB_API_TOKEN="832317cbf968a6837882f95419a300a493629a5d"
     ;;
   linux*)
     alias ls='ls --color=auto'
