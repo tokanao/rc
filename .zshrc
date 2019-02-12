@@ -14,6 +14,7 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
 export PAGER=less
+# export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 # reset & emacs mode
@@ -23,7 +24,12 @@ bindkey -e
 # alias
 alias -g L='|lv'
 alias -g H='|head -n 20'
+alias -g GN='grep -inr'
+alias -g GL='grep -ilr'
+alias -g V='|vi -'
+alias -g P='|peco'
 alias la='ls -a'
+alias lsd='ls -l -d'
 [ ! -e "/usr/bin/lv" ] && alias lv='less'
 alias h='history 0'
 alias vi='vim'
@@ -43,13 +49,17 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 alias psg='ps aux|grep'
-alias hgr='history 0|grep'
 alias be='bundle exec'
+alias ctags='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+alias fcd='cd "$(find . -type d | peco)"'
+alias hgr='history 0|grep'
+# alias hgr='echo $(history 0|peco)'
+
 alias tplcp='~/bin/tcp.rb'
 alias tpldiff='~/bin/tpldiff.rb'
 case ${OSTYPE} in
   darwin*)
-    alias gvi='/Applications/MacVim.app/Contents/MacOS/MacVim "$@"'
+    alias gvi='open /Applications/MacVim.app "$@"'
     alias ls='ls -G'
     alias ll='ls -lt -G'
     ;;
@@ -146,14 +156,16 @@ setopt extended_glob
 
 
 # ^j で、cd ..
-function cdup() {
-  echo
-  cd ..
-  #zle reset-prompt
-  zle accept-line
-}
-zle -N cdup
-bindkey '^j' cdup
+# function cdup() {
+#   echo
+#   cd ..
+#   #zle reset-prompt
+#   zle accept-line
+# }
+# zle -N cdup
+# bindkey '^j' cdup
+
+# ^o is cd up
 function cdold() {
   cd -
   zle accept-line
@@ -177,18 +189,42 @@ bindkey "^N" history-beginning-search-forward-end
 # getconf ARG_MAX
 zmodload zsh/files
 
+[ -d /usr/local/opt.coreutils/libexec/gnubi ] && export PATH="$PATH:/usr/local/opt.coreutils/libexec/gnubin"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+
+
+#### too heavy
 
 if [ -d "$HOME/.rbenv/bin" ] ; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
 
+# https://qiita.com/kawakami-kazuyoshi/items/bd148312815fb75818ee
+if [ -d $HOME/.anyenv ] ; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+  # tmux対応
+  # for D in `\ls $HOME/.anyenv/envs`
+  # do
+  #   export PATH="$HOME/.anyenv/envs/$D/bin:$PATH"
+  # done
+fi
+
+[ -s ~/.nvm/nvm.sh ] && source ~/.nvm/nvm.sh
+if [ -d /usr/local/opt/nvm ] ; then
+  export NVM_DIR="$HOME/.nvm"
+  source "/usr/local/opt/nvm/nvm.sh"
+fi
+
+
 # Required:
 # curl -L git.io/nodebrew | perl - setup
 if [ -d "$HOME/.nodebrew/current/bin" ] ; then
   export PATH="$HOME/.nodebrew/current/bin:$PATH"
 fi
+
+[ -d ~/gibo ] && export PATH="$HOME/gibo:$PATH"
 
 
 # dabbrev
@@ -209,18 +245,49 @@ fi
 # Required: fzf
 # git clone https://github.com/junegunn/fzf.git ~/.fzf
 # ~/.fzf/install
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-function select-history() {
-  BUFFER=$(history -n -r 1 | awk '!a[$0]++' |fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
-  # CURSOR=$#BUFFER
-  zle accept-line
-}
+# git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+# [ -d ~/.zsh/zsh-autosuggestions ] && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# function select-history() {
+#   BUFFER=$(history -n -r 1 | awk '!a[$0]++' |fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+#   # CURSOR=$#BUFFER
+#   zle accept-line
+# }
 # zle -N select-history
 # bindkey '^r' select-history
 
-[ -s ~/.nvm/nvm.sh ] && source ~/.nvm/nvm.sh
-[ -d ~/gibo ] && export PATH="$HOME/gibo:$PATH"
+function peco-history-selection() {
+    # BUFFER=`history -n 1 | tac | awk '!a[$0]++' | peco`
+    BUFFER=`history -n 1 | tail -r | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
+
+#### mageee
+[ -d ~/google-cloud-sdk ] && export PATH="/Users/tokashiki/google-cloud-sdk/bin:$PATH"
+[ -d /usr/local/opt/mysql@5.7 ] && export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+if [ -d /usr/local/opt/imagemagick@6 ] ; then
+  # need to `brew install pkgconfig`
+  export PATH="/usr/local/opt/imagemagick@6/bin:$PATH" 
+  export PKG_CONFIG_PATH=/usr/local/opt/imagemagick@6/lib/pkgconfig;
+fi
+
+if [ -e /usr/libexec/java_home ] ; then
+  export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home'
+  PATH=$PATH:$JAVA_HOME/bin
+fi
+
+if [ -d $HOME/Library/Android/sdk ] ; then
+  export ANDROID_HOME='/Users/tokashiki/Library/Android/sdk'
+  PATH=$PATH:$ANDROID_HOME/platform-tools
+  PATH=$PATH:$ANDROID_HOME/tools/bin
+  PATH="$PATH:$ANDROID_HOME/build-tools/28.0.2"
+fi
 
 
 
