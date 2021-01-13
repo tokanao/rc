@@ -80,7 +80,7 @@ au BufRead,BufNewFile *.axlsx setf ruby
 ab YDATE =strftime("%Y/%m/%d")<CR>
 
 au FileType php ab errlog error_log(print_r($foo));
-au FileType php set noet
+au FileType php set et
 au FileType html set et
 " au FileType ruby ab perform start_time = Time.now; p "処理概要 #{Time.now - start_time}s"
 au FileType ruby ab logd logger.debug("DEBUG: params => #{params}")
@@ -92,6 +92,8 @@ autocmd WinEnter    * set cursorline
 autocmd WinLeave    * set nocursorline
 autocmd InsertEnter * set nocursorline
 autocmd InsertLeave * set cursorline
+
+" autocmd BufWinEnter,BufNewFile * silent tabo
 
 " html tag piece jump
 source $VIMRUNTIME/macros/matchit.vim

@@ -91,9 +91,12 @@ repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'lambdalisue/vim-gista'
 
-[[plugins]]
-repo = 'tsaleh/vim-matchit'
+# [[plugins]]
+# repo = 'tsaleh/vim-matchit'
 
 [[plugins]]
 # https://relishapp.com/despo/vim-ruby-refactoring/docs
 repo = 'ecomba/vim-ruby-refactoring'
+
+[[plugins]]
+repo = 'posva/vim-vue'
