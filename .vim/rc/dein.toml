@@ -35,8 +35,8 @@ repo = "thinca/vim-quickrun"
 [[plugins]]
 repo = "kchmck/vim-coffee-script"
 
-[[plugins]]
-repo = "JarrodCTaylor/vim-js2coffee"
+#[[plugins]]
+#repo = "JarrodCTaylor/vim-js2coffee"
 
 [[plugins]]
 repo = 'jphustman/Align.vim'
@@ -91,8 +91,8 @@ repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'lambdalisue/vim-gista'
 
-# [[plugins]]
-# repo = 'tsaleh/vim-matchit'
+#[[plugins]]
+#repo = 'tsaleh/vim-matchit'
 
 [[plugins]]
 # https://relishapp.com/despo/vim-ruby-refactoring/docs

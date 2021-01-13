@@ -15,7 +15,6 @@ export LANG=ja_JP.UTF-8
 export EDITOR=vim
 export PAGER=less
 # export PATH="$HOME/bin:$PATH"
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 # reset & emacs mode
 bindkey -d
@@ -195,7 +194,7 @@ bindkey "^N" history-beginning-search-forward-end
 zmodload zsh/files
 
 [ -d /usr/local/opt.coreutils/libexec/gnubi ] && export PATH="$PATH:/usr/local/opt.coreutils/libexec/gnubin"
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+# export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 
 #### too heavy
@@ -275,11 +274,14 @@ bindkey '^R' peco-history-selection
 
 #### mageee
 [ -d ~/google-cloud-sdk ] && export PATH="/Users/tokashiki/google-cloud-sdk/bin:$PATH"
-[ -d /usr/local/opt/mysql@5.7 ] && export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+if [ -d /usr/local/opt/mysql@5.7 ] ; then
+  export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+  export PKG_CONFIG_PATH="/usr/local/opt/mysql@5.7/lib/pkgconfig:$PKG_CONFIG_PATH"
+fi
 if [ -d /usr/local/opt/imagemagick@6 ] ; then
   # need to `brew install pkgconfig`
   export PATH="/usr/local/opt/imagemagick@6/bin:$PATH" 
-  export PKG_CONFIG_PATH=/usr/local/opt/imagemagick@6/lib/pkgconfig;
+  export PKG_CONFIG_PATH="/usr/local/opt/imagemagick@6/lib/pkgconfig:$PKG_CONFIG_PATH";
 fi
 
 if [ -e /usr/libexec/java_home ] ; then
@@ -306,7 +308,16 @@ fi
 if [ -d /usr/local/Cellar/libpq/12.1/bin ] ; then
   export PATH="/usr/local/Cellar/libpq/12.1/bin:$PATH"
 fi
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/tokashiki/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/tokashiki/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/tokashiki/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/tokashiki/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export GNUMAKEFLAGS=-j8
 
 
 
 #vim:ts=4:sw=4:et
+
