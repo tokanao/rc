@@ -95,8 +95,8 @@ if has('mac')
   colorscheme morning
 
   map m :set lines=40<CR>:set columns=110<CR>
-  map l :set lines=60<CR>:set columns=110<CR>
-  map h :set columns=160<CR>
+  map l :set lines=50<CR>:set columns=110<CR>
+  map h :set columns=140<CR>
 
   " Move Window
   nmap <C-f> :winpos =getwinposx() + 30<CR> =getwinposy()<CR><CR>
