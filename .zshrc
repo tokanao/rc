@@ -35,6 +35,7 @@ alias h='history 0'
 alias vi='vim'
 alias vizshrc='vi ~/.zshrc ~/.zprofile ~/.zshenv ; source ~/.zshrc'
 alias vivimrc='vi ~/.vimrc'
+alias visshconfig='vi ~/.ssh/config'
 alias vinginx='vi /etc/nginx/conf.d'
 alias viblog='vi /mnt/hgfs/railsprj/blog/source/blog/posts/'
 #alias tree='tree --charset=x'
@@ -50,10 +51,14 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias psg='ps aux|grep'
 alias be='bundle exec'
+alias rdebug='bundle exec rdebug-ide --host 127.0.0.1 --port 1234 --dispatcher-port 26162 -- bin/rails s'
 alias ctags='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 alias fcd='cd "$(find . -type d | peco)"'
 alias hgr='history 0|grep'
 # alias hgr='echo $(history 0|peco)'
+alias lsql='ls -lth *.sql'
+alias check_release_stg="ssh stg 'cat /var/www/stg-manager.my-shop.fun/revisions.log|tail -n 3 && ls -l /var/www/stg-manager.my-shop.fun/revisions.log'"
+alias check_release_prod="ssh prod 'cat /var/www/manager.my-shop.fun/revisions.log|tail -n 3 && ls -l /var/www/manager.my-shop.fun/revisions.log'"
 
 alias tplcp='~/bin/tcp.rb'
 alias tpldiff='~/bin/tpldiff.rb'
@@ -287,6 +292,19 @@ if [ -d $HOME/Library/Android/sdk ] ; then
   PATH=$PATH:$ANDROID_HOME/platform-tools
   PATH=$PATH:$ANDROID_HOME/tools/bin
   PATH="$PATH:$ANDROID_HOME/build-tools/28.0.2"
+fi
+
+if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+    }
+    zle -N zle-line-init
+    zstyle ':completion:*' completer _oldlist _complete
+fi
+
+if [ -d /usr/local/Cellar/libpq/12.1/bin ] ; then
+  export PATH="/usr/local/Cellar/libpq/12.1/bin:$PATH"
 fi
 
 

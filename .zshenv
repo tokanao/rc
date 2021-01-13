@@ -1,6 +1,6 @@
 
 ## 重複パスを登録しない
-# typeset -U path cdpath fpath manpath
+typeset -U path cdpath fpath manpath
 
 # if [ -e /usr/local/share/zsh-completions ]; then
 #     fpath=(/usr/local/share/zsh-completions $fpath)
@@ -13,7 +13,7 @@ compinit
 # print -N ./**/*(.) | xargs -0 rm
 autoload zargs
 
-# 補完でカラーを使用する
+# iterm2 ref.https://qiita.com/nishina555/items/c3cdab6d059ee494c66e
 autoload -U colors; colors
 
 
