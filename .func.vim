@@ -79,6 +79,14 @@ function! DSplit()  " {{{
   execute "diffsplit " . fpath
 endfunc   " }}}
 
+" if executable('jq')
+"   function! FormatJson()
+"     execute "%!jq '.'"
+"     set filetype=json
+"   endfunction
+"   nmap <Leader>jf :call FormatJson()<CR>
+" endif
+
 " ---- ECCUBE CUSTOM ---- {{{
 command! EcTemplate call EccubeTemplate()
 command! EcCarrier call EccubeChangeCarrier()

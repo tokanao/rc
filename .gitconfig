@@ -1,16 +1,28 @@
 [core]
 	editor = vim
+	excludesfile = /Users/tokashiki/.gitignore_global
 [alias]
 	co = checkout
 	br = branch
 	sb = show-branch
 	st = stash
+  gr = log --graph --branches --pretty=format:'%d [%h] \"%s\"'
+  # anc ="show-branch --sha1-name develop {git symbolic-ref --short HEAD}"
+  revp = rev-parse --short
 [user]
-  name = tokanao
-  email = ggtoka@gmail.com
+  name = "渡嘉敷 直也"
+  email = tokashiki@magee.jp
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[init]
-	templatedir = /Users/toka/.git_template/
+# [init]
+# 	templatedir = /Users/toka/.git_template/
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = current

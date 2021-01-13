@@ -42,3 +42,10 @@
 
 " デフォルトショートカットキー
 " :h index.txt
+
+" JSON format
+" brew isntall jq
+" %!jq '.'
+"
+" sudo で保存
+"w !sudo tee > /dev/null %
