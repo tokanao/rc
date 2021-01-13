@@ -15,6 +15,7 @@ bind 2:ctrl focus 'メール'
 bind 3:ctrl focus 'Safari'
 bind 4:ctrl focus 'Google Chrome'
 bind 5:ctrl focus 'Code'
+bind 6:ctrl focus 'Postman'
 bind 8:ctrl focus 'MacVim'
 bind 9:ctrl focus 'Sequel Pro'
 

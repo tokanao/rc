@@ -92,7 +92,8 @@ colorscheme darkblue
 if has('mac')
   set backupdir=/tmp
 
-  colorscheme morning
+  "colorscheme morning
+  colorscheme default
 
   map m :set lines=40<CR>:set columns=110<CR>
   map l :set lines=50<CR>:set columns=110<CR>
