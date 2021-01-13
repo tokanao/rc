@@ -1,0 +1,27 @@
+# https://github.com/jigish/slate
+# https://github.com/jigish/dotfiles/blob/master/slate
+
+bind r:alt,ctrl relaunch
+
+bind l:alt focus right
+bind h:alt focus left
+bind k:alt focus up
+bind j:alt focus down
+
+# bind i:alt focus behind
+bind i:alt hint QWERTYUIOP
+bind 1:ctrl focus 'iTerm2'
+bind 2:ctrl focus 'メール'
+bind 3:ctrl focus 'Safari'
+bind 4:ctrl focus 'Google Chrome'
+bind 5:ctrl focus 'Code'
+bind 8:ctrl focus 'MacVim'
+bind 9:ctrl focus 'Sequel Pro'
+
+
+# bind j:alt     move screenSizeX/4;0 screenSizeX/2;screenSizeY
+# bind f:alt,shift     move screenSizeX+10;screenSizeY screenSizeX;screenSizeY
+bind l:alt,ctrl     nudge +2% +0
+bind h:alt,ctrl     nudge -2% +0
+bind k:alt,ctrl     nudge +0 +2%
+bind j:alt,ctrl     nudge +0 -2%
