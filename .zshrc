@@ -14,7 +14,8 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
 export PAGER=less
-# export PATH="$HOME/bin:$PATH"
+# export PAGER='lv -c'
+export PATH="$HOME/bin:$PATH"
 
 # reset & emacs mode
 bindkey -d
@@ -27,10 +28,12 @@ alias -g GN='grep -inr'
 alias -g GL='grep -ilr'
 alias -g V='|vi -'
 alias -g P='|peco'
+alias -g 1P='|sed -n 1P'
 alias la='ls -a'
 alias lsd='ls -l -d'
-[ ! -e "/usr/bin/lv" ] && alias lv='less'
+[ ! -e "/usr/local/bin/lv" ] && alias lv='less'
 alias h='history 0'
+alias hold='view ~/.zsh_history-oldmac'
 alias vi='vim'
 alias vizshrc='vi ~/.zshrc ~/.zprofile ~/.zshenv ; source ~/.zshrc'
 alias vivimrc='vi ~/.vimrc'
@@ -51,7 +54,8 @@ alias cp='cp -i'
 alias psg='ps aux|grep'
 alias be='bundle exec'
 alias rdebug='bundle exec rdebug-ide --host 127.0.0.1 --port 1234 --dispatcher-port 26162 -- bin/rails s'
-alias ctags='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+alias ctags='/usr/local/Cellar/ctags/5.8_2/bin/ctags'
+
 alias fcd='cd "$(find . -type d | peco)"'
 alias hgr='history 0|grep'
 # alias hgr='echo $(history 0|peco)'
@@ -65,7 +69,7 @@ case ${OSTYPE} in
   darwin*)
     alias gvi='open /Applications/MacVim.app "$@"'
     alias ls='ls -G'
-    alias ll='ls -lt -G'
+    alias ll='ls -lth -G'
     ;;
   linux*)
     alias ls='ls --color=auto'
@@ -285,7 +289,7 @@ if [ -d /usr/local/opt/imagemagick@6 ] ; then
 fi
 
 if [ -e /usr/libexec/java_home ] ; then
-  export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home'
+  export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
   PATH=$PATH:$JAVA_HOME/bin
 fi
 
@@ -308,16 +312,33 @@ fi
 if [ -d /usr/local/Cellar/libpq/12.1/bin ] ; then
   export PATH="/usr/local/Cellar/libpq/12.1/bin:$PATH"
 fi
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/tokashiki/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/tokashiki/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/tokashiki/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/tokashiki/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 
 export GNUMAKEFLAGS=-j8
 
 
 
-#vim:ts=4:sw=4:et
+if [ -d ~/go ] ; then
+  export GOPATH=~/go
+  export PATH="$GOPATH/bin:$PATH"
+fi
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/tokashiki/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/tokashiki/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/tokashiki/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/tokashiki/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+
+export HOMEBREW_NO_AUTO_UPDATE=1
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
+export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
+
+
+
+
+
+#vim:ts=4:sw=4:et

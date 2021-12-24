@@ -11,13 +11,15 @@ bind j:alt focus down
 # bind i:alt focus behind
 bind i:alt hint QWERTYUIOP
 bind 1:ctrl focus 'iTerm2'
-bind 2:ctrl focus 'メール'
+#bind 2:ctrl focus 'メール'
+#bind 2:ctrl focus 'Google Chat'
+bind 2:ctrl focus 'Sequel Pro'
 bind 3:ctrl focus 'Safari'
 bind 4:ctrl focus 'Google Chrome'
 bind 5:ctrl focus 'Code'
 bind 6:ctrl focus 'Postman'
-bind 8:ctrl focus 'MacVim'
-bind 9:ctrl focus 'Sequel Pro'
+# 7, 8 - CopyClip2
+#bind 8:ctrl focus 'MacVim'
 
 
 # bind j:alt     move screenSizeX/4;0 screenSizeX/2;screenSizeY

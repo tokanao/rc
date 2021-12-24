@@ -49,3 +49,6 @@
 "
 " sudo で保存
 "w !sudo tee > /dev/null %
+
+" easy mode
+" :set im!

@@ -36,4 +36,4 @@ if [ -d "$HOME/database/data" ] ; then
   export PGDATA=/Users/toka/database/data
 fi
 
-[ -d ~/go ] && export GOPATH=~/go
+#[ -d ~/go ] && export GOPATH=~/go
