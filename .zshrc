@@ -63,6 +63,11 @@ alias lsql='ls -lth *.sql'
 alias check_release_stg="ssh stg 'cat /var/www/stg-manager.my-shop.fun/revisions.log|tail -n 3 && ls -l /var/www/stg-manager.my-shop.fun/revisions.log'"
 alias check_release_prod="ssh prod 'cat /var/www/manager.my-shop.fun/revisions.log|tail -n 3 && ls -l /var/www/manager.my-shop.fun/revisions.log'"
 
+alias macvim="/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-tab-silent"
+alias dc='docker-compose'
+alias clear_dc_log="docker run -it --rm --privileged --pid=host infonova_mock_web nsenter -t 1 -m -u -n -i -- sh -c 'truncate -s0 /var/lib/docker/containers/*/*-json.log'"
+alias start_ec2='aws ec2 start-instances --instance-ids i-0f6f3b663c7ce375f'
+alias stop_ec2='aws ec2 stop-instances --instance-ids i-0f6f3b663c7ce375f'
 alias tplcp='~/bin/tcp.rb'
 alias tpldiff='~/bin/tpldiff.rb'
 case ${OSTYPE} in
